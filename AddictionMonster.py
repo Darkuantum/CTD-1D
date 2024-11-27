@@ -9,7 +9,10 @@ class AddictionMonster:
 
     def battle(self, qna, debuff_dict,debuff): ## qna and debuff can be functions that can be defined with minigame_1.py 
         '''this function sets the battle for the specific monster
-            theres a dictionary debuff and a function debuff - need to find a way to make sure they don't conflict 
+           inputs : 
+           qna - dictionary input 
+           debuff_dict - flag to check if debuff needed. wrapped in dictionary to amke it mutable
+           debuff - function to actually debuff if the player gets the question wrong 
         '''
         self.qns = qna[self.name]["qns_dict"]
         self.ans = qna[self.name]["ans_dict"]
