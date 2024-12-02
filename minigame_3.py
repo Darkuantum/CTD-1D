@@ -2,14 +2,19 @@
 import random
 
 #change colours with number range of 0-50
-ls = []
+#if wrong, instant game over (other idea: score system)
 
-for i in range(random number):
-    if i%2 == 1 and i < 20:
-       ls.append[i]
-    
-print(ls)
 
-for i in random :
-    if i in ls:
-        #change colour of i in ls
+
+def create_list():
+    ls = []
+    for i in range(51):
+        ls.append(i)
+    return ls
+
+def new_list(ls):
+    random_ls = []
+    # a = random.randint(0, 51)
+    for i in random:
+        if i in ls:
+            #change colour of i in ls
