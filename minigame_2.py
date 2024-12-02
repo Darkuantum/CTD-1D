@@ -29,7 +29,7 @@ def challenge_player(dictionary, numWins) -> dict:
     pass
 
 def filter(response) -> list:
-    invalid_symbols = ['!', ',', '@', '#', '%', "^", "*", '$', '&', '?', '.']
+    invalid_symbols = ['!', ',', '@', '#', '%', "^", "*", '$', '&', '?', '.', "'", '"', "-", "/"]
     response_list = response #define response_list is the same as response
 
     for i in invalid_symbols: #Sort out all the additional symbols for error
