@@ -6,6 +6,8 @@ from copy import deepcopy
 
 tc = TermControl()
 
+# TODO: Comments to document the whole document
+
 easy = { #Nathan's Dictionary
     1: ["blue", "sky"],
     2: ["fear", "dark", "death"],
@@ -30,12 +32,12 @@ hard = { #Nathaniel's Dictionary
     5: ["maintenance", "nominate", "novelist", "numeric", "quintuplet"]
 }
 
-def randomiser(difficulty, numWins):
+def randomiser(difficulty, numWins) -> list:
     current_list = deepcopy(difficulty[numWins+1])
     random.shuffle(current_list)
     return current_list
       
-def countdown(t):
+def countdown(t) -> None:
     print("Memorize the order of the words before the timer runs out.")
     while t:
         mins, secs=divmod(t,60)
@@ -44,7 +46,7 @@ def countdown(t):
         time.sleep(1)
         t-=1
 
-def print_prompts(dictionary, numWins, timer):
+def print_prompts(dictionary, numWins, timer) -> None:
     tc.changeColor("cyan")
     print(dictionary[numWins + 1])
     countdown(timer)
