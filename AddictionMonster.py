@@ -1,59 +1,60 @@
-### creating a class for the addiction monster battle ### 
-
 class AddictionMonster:
-    
-    def __init__(self,name,player_hp=370) -> None:
-        self.name = name 
-        self.monster_hp = 100 
+    def __init__(self, name, monster_hp=100, player_hp=100):
+        """Initialize monster with name and health values."""
+        self.name = name
+        self.monster_hp = monster_hp
         self.player_hp = player_hp
 
-    def battle(self, qna, debuff_dd,debuff): ## qna and debuff can be functions that can be defined with minigame_1.py 
-        '''this function sets the battle for the specific monster
-           inputs : 
-           qna - dictionary input 
-           debuff_dict - flag to check if debuff needed. wrapped in dictionary to amke it mutable
-           debuff - function to actually debuff if the player gets the question wrong 
-        '''
-        self.qns = qna[self.name]["qns_dict"]
-        self.ans = qna[self.name]["ans_dict"]
-        self.debuff_flag = False
-        self.battle_won = False
-        welcome_string = input(f'Welcome to the {self.name} battle! There are 5 yes/no questions with regards to the monster that you need to answer in order to defeat the {self.name}! Are you ready to meet your enemy?(yes/no):\n')
-        if welcome_string == 'yes':
-            print()
-            for i in range(1, len(self.qns) +1):
-                self.question_no = self.qns['Q'+str(i)] + ':' +  '\n'  
-                if debuff_dd['sight']:
-                    print(f'Debuffed!!\n')
-                    self.player_ans = debuff(self.question_no)
-                else:
-                    print(f'No debuff for you! Nice!\n')
-                    self.player_ans = input(f'{self.question_no}')
-                self.player_ans = self.player_ans.lower()
-                if self.player_ans == self.ans['Q'+ str(i)]:
-                    debuff_dd['sight'] = False
-                    self.monster_hp -= 20
-                    print(f'\n***************')
-                    print('monster hp: %d' % self.monster_hp)
-                    print('player hp: %d' % self.player_hp)
-                    print(f'***************\n')
-                    if self.monster_hp == 0:
-                        self.battle_won = True 
-                        print(f"Good job! You beat {self.name}!!!")
-                        return self.battle_won  # battle_win('smoking_monster')
-                else:
-                    debuff_dd['sight'] = True
-                    self.player_hp -= 25
-                    print(f'\n***************')
-                    print('monster hp: %d' % self.monster_hp)
-                    print('player hp: %d' % self.player_hp)
-                    print(f'***************\n')
-                    if self.player_hp == 0:
-                        print("You died!")
-                        return self.battle_won # battle_win('smoking_monster')
-            if self.monster_hp > 0:
-                print("You ran out of questions, but the monster is still alive. You lost!")
-                return self.battle_won
+    def battle(self, qna, debuff_dd, debuff_fn, lives):
+        """
+        Conducts a battle between the player and the monster.
+
+        Parameters:
+        - qna: Dictionary containing questions and answers for all monsters.
+        - debuff_dd: Dictionary with the debuff flag.
+        - debuff_fn: Function to apply the debuff if needed.
+        - lives: Remaining player lives.
+
+        Returns:
+        - Tuple: (Boolean, int) -> (Did the player win this battle?, Remaining lives)
+        """
+        questions_and_answers = qna[self.name]
+        
+        print(f"Welcome to the {self.name} battle!")
+        print("Answer 5 yes/no questions correctly to defeat the monster.\n")
+
+        for question_text, correct_answer in questions_and_answers:
+            # Apply debuff if active
+            if debuff_dd['sight']:
+                player_answer = debuff_fn(question_text)
+            else:
+                player_answer = input(f'{question_text}:\n').strip().lower()
+
+            # Check the player's answer
+            if player_answer == correct_answer:
+                debuff_dd['sight'] = False  # Disable debuff on correct answer
+                self.monster_hp -= 20
+                print(f"Correct! Monster HP: {self.monster_hp}, Player HP: {self.player_hp}, Lives: {lives}")
+            else:
+                debuff_dd['sight'] = True  # Enable debuff on incorrect answer
+                self.player_hp -= 25
+                print(f"Wrong! Monster HP: {self.monster_hp}, Player HP: {self.player_hp}, Lives: {lives}")
+
+            # Check if the monster is defeated
+            if self.monster_hp <= 0:
+                print(f"You defeated the {self.name}!")
+                return True, lives
+
+            # Check if the player loses all HP
+            if self.player_hp <= 0:
+                print("You lost all your HP in this battle.")
+                break
+
+        # If questions are exhausted or HP is 0, player loses a life
+        lives -= 1
+        if lives > 0:
+            print(f"You lost the battle against {self.name}. Remaining lives: {lives}.")
         else:
-            print("Come back when you are ready.")
-                    
+            print("You are out of lives. Game Over!")
+
+        return False, lives
