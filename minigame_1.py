@@ -12,25 +12,25 @@ namely:
 encryption_dict = {'a': '@', 'b': '6', 'c': '(', 'e': '€', 'f': '£', 'g': '&', 'i': '!', 'j': '?', 'k': '<', 'l': '1', 'o': '0', 'q': '9', 's': '$', 't': '7', 'v': '^', 'x': '*', 'y': '¥', 'z': '2'}
 # question and answer dictionary with 3 levels of nesting 
 qna = {
-    # "pp_monster": {
-    #     "qns_dict": {"Q1": "AV is good for you"},
-    #     "ans_dict": {"Q1": "yes"}
-    # },
+    "pp_monster": {
+        "qns_dict": {"Q1": "AV is good for you"},
+        "ans_dict": {"Q1": "yes"}
+    },
     "smoke_monster": {
         "qns_dict": {"Q1": "Is vaping is good for you?"},
         "ans_dict": {"Q1": "no"}
     },
-    # "drug_monster": {
-    #     "qns_dict": {"Q1": "Drugs are good for you"},
-    #     "ans_dict": {"Q1": "yes"}
-    # },
+    "drug_monster": {
+        "qns_dict": {"Q1": "Drugs are good for you"},
+        "ans_dict": {"Q1": "yes"}
+    },
     "gambling_monster": {
-        "qns_dict": {"Q1": "How much do you want to gamble?","Q2": "How much do you want to gamble?","Q3": "How much do you want to gamble?","Q4": "How much do you want to gamble?","Q5": "How much do you want to gamble?"},
-        "ans_dict": {"Q1": "yes","Q2": "yes","Q3": "yes","Q4": "yes","Q5": "yes"}
+        "qns_dict": {"Q1": "How much do you want to gamble?"},
+        "ans_dict": {"Q1": "yes"}
     },
     "alcohol_monster": {
-        "qns_dict": {"Q1": "Alcohol is haram"},
-        "ans_dict": {"Q1": "yes"}
+        "qns_dict": {"Q1": "Can alcohol impair judgment and coordination?", "Q2": "Is it safe to drink alcohol during pregnancy?", "Q3": "Can binge drinking lead to alcohol poisoning?", "Q4": "Does moderate alcohol consumption pose no risks at all?", "Q5": "Does alcohol dehydrate the body?"},
+        "ans_dict": {"Q1": "yes", "Q2": "no", "Q3": "yes", "Q4": "no", "Q5": "yes"}
     },
 }
 # debuff flag in the form of a dictionary lol 
