@@ -7,7 +7,7 @@ class AddictionMonster:
         self.monster_hp = 100 
         self.player_hp = 100   
 
-    def battle(self, qna, debuff_dict,debuff): ## qna and debuff can be functions that can be defined with minigame_1.py 
+    def battle(self, qna, debuff_dd,debuff): ## qna and debuff can be functions that can be defined with minigame_1.py 
         '''this function sets the battle for the specific monster
            inputs : 
            qna - dictionary input 
@@ -18,14 +18,14 @@ class AddictionMonster:
         self.ans = qna[self.name]["ans_dict"]
         self.debuff_flag = False
 
-        for i in range(len(1, self.qns) +1):
-            self.question_no = self.qns['Q'+str(i)]
-            if debuff_dict['debuff']:
+        for i in range(1, len(self.qns) +1):
+            self.question_no = self.qns['Q'+str(i)] + ':' +  '\n'  
+            if debuff_dd['sight']:
                 self.player_ans = debuff(self.question_no)
             else:
-                self.player_ans = input(self.question_no)
+                self.player_ans = input({self.question_no})
             
-            if self.player_ans.lower == self.ans[self.question_no]:
+            if self.player_ans.lower == self.ans['Q'+ str(i)]:
                 monster_hp -= 20
                 if monster_hp == 0:
                     return  'yay' # battle_win('smoking_monster')
