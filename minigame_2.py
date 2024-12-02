@@ -67,4 +67,3 @@ def verify(dictionary):
     
 
 
-verify(2)
