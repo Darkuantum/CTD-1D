@@ -46,24 +46,21 @@ for 3 main vices - alcohol, gambling and smoking.
 '''
 
 
-gambling =  am.AddictionMonster('gambling_monster')
-gambling_battle = gambling.battle(qna, debuff_dict,sight_debuff)
+# List of monsters in order of battles
+monster_names = ['gambling_monster', 'alcohol_monster', 'smoke_monster']
 
-if gambling_battle: 
-    print("Moving on to the next battle....")
-    alcohol =  am.AddictionMonster('alcohol_monster')
-    alcohol_battle = alcohol.battle(qna, debuff_dict,sight_debuff)
-    if alcohol_battle:
-        print("Moving on to the next battle....")
-        smoking =  am.AddictionMonster('smoke_monster')
-        smoking_battle = smoking.battle(qna, debuff_dict,sight_debuff)
-        if smoking_battle:
-           time.sleep(10)
-           print("You have successfully beaten your addictions! You're free!")
-        else:
-            smoking_battle
+# Iterate through each monster and initiate the battles
+for monster_name in monster_names:
+    monster = am.AddictionMonster(monster_name)
+    battle_won = monster.battle(qna, debuff_dict, sight_debuff)
+    if not battle_won:
+        print(f"You lost the battle against {monster_name}. Game Over.")
+        break
     else:
-       alcohol_battle
+        print(f"Congratulations! You defeated the {monster_name}. Moving on to the next battle...")
+        time.sleep(3)
 else:
-   gambling_battle
+    time.sleep(3)
+    print("You have successfully beaten your addictions! You're free!")
+
     
