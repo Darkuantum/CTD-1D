@@ -2,7 +2,9 @@ import random
 import time
 from TermControl import TermControl
 import random
-wins = 2 #reference based of nathan
+from copy import deepcopy
+
+tc = TermControl()
 
 easy = { #Nathan's Dictionary
     1: ["blue", "sky"],
@@ -20,7 +22,7 @@ medium = { #Ryan's Dictionary
     5: ["velvet","magnet","enrich","hectic","banish"]
 }
 
-hard = {
+hard = { #Nathaniel's Dictionary
     1: ["animal", "behavior", "confident" ], 
     2: ["accurate", "ambition", "businessman", "customer"],
     3: ["emphasis", "explorer", "forcible", "fertilize", "heritage" ],
@@ -28,20 +30,28 @@ hard = {
     5: ["maintenance", "nominate", "novelist", "numeric", "quintuplet"]
 }
 
-
-def randomiser(difficulty, wins):
-    current_list = difficulty[wins+1]
+def randomiser(difficulty, numWins):
+    current_list = deepcopy(difficulty[numWins+1])
     random.shuffle(current_list)
     return current_list
       
-def Countdown(t):
-    t=10
+def countdown(t):
+    print("Memorize the order of the words before the timer runs out.")
     while t:
         mins, secs=divmod(t,60)
         timer='{:02d}:{:02d}'.format( mins, secs)
         print(timer, end="\r")
         time.sleep(1)
         t-=1
+
+def print_prompts(dictionary, numWins, timer):
+    tc.changeColor("cyan")
+    print(dictionary[numWins + 1])
+    countdown(timer)
+    tc.clearScreen()
+    tc.changeColor("magenta")
+    print(randomiser(dictionary, numWins))
+    tc.resetColor()
 
 def filter(response) -> list:
     invalid_symbols = ['!', ',', '@', '#', '%', "^", "*", '$', '&', '?', '.', "'", '"', "-", "/"]
@@ -55,15 +65,15 @@ def filter(response) -> list:
 def verify(dictionary, numWins) -> bool:
     message_dict = { 
                 1: "Zoom zoom, that just flew past you. I didn't see a thing?", 
-                2: "Did you see that? Are you sure you can rememeber?",
+                2: "Did you see that? Are you sure you can remember?",
                 3: "Wow that's hella fast cuhhh",
                 4: "Are you confident you can do this? Aren't you a bit demented?", 
-                5: "Let it snow, let it snow, can't hold it back... oh you were watiting for me?",
+                5: "Let it snow, let it snow, can't hold it back... oh you were waiting for me?",
                 6: "I need you to focus 0.0", 
                 7: "Why are you still here?",
                 8: "I'm not sure if I remember what I saw...",
                 9: "Ohhh man, I really couldn't remember what I saw...",
-                10: "Bing bang bongo, I can't believe caught all that. Did you?"
+                10: "Bing bang bongo, I can't believe I caught all that. Did you?"
     }
 
     message_choice = random.randint(1,10) #randomize the insult message
@@ -83,8 +93,7 @@ def alzheimerGame() -> None:
     numWins = 0
     isGameOver = False
     difficulty = None
-
-    tc = TermControl()
+    timer = 0
 
     print("Welcome to the Alzheimer memory word game.")
     while not isGameOver:
@@ -99,10 +108,13 @@ def alzheimerGame() -> None:
             match int(choice):
                 case 1:
                     difficulty = easy
+                    timer = 10
                 case 2:
                     difficulty = medium
+                    timer = 8
                 case 3:
                     difficulty = hard
+                    timer = 5
                 case _:
                     tc.clearScreen()
                     print("\nThat is not a valid difficulty.")
@@ -111,7 +123,7 @@ def alzheimerGame() -> None:
             tc.resetColor()
             print("You have chosen difficulty {}.".format(choice))
 
-        randomiser(difficulty, numWins)
+        print_prompts(difficulty, numWins, timer)
         isInputCorrect = verify(difficulty, numWins)
         
         if not isInputCorrect:

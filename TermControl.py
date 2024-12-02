@@ -23,7 +23,7 @@ class TermControl:
 
 def main():
     tc = TermControl()
-    print("Hello \033[31m world!")
+    print("Hello  world\033[31m!")
     tc.resetColor()
     tc.changeColor(color="blue")
     print("Testing in blue")
