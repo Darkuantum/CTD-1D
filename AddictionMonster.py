@@ -34,7 +34,6 @@ class AddictionMonster:
                     if self.monster_hp == 0:
                         self.battle_won = True 
                         print("You won!")
-                        print("Moving on to the next battle....")
                         return self.battle_won  # battle_win('smoking_monster')
                 else:
                     self.player_hp -= 25
@@ -43,5 +42,6 @@ class AddictionMonster:
                     if self.player_hp == 0:
                         print("You lost!")
                         return self.battle_won # battle_win('smoking_monster')
+        else:
+            print("Come back when you are ready.")
                     
-

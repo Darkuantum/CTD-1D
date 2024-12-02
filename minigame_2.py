@@ -1,7 +1,10 @@
+import random 
+import time
 from TermControl import TermControl
 import random
+wins = 2 #reference based of nathan
 
-level_1 = { #Nathan's Dictionary
+easy = { #Nathan's Dictionary
     1: ["blue", "sky"],
     2: ["fear", "dark", "death"],
     3: ["pear", "young", "dad", "ground"],
@@ -9,7 +12,7 @@ level_1 = { #Nathan's Dictionary
     5: ["key", "dust", "drum", "jump", "bread", "grass"]
 }
 
-level_2 = { #Ryan's Dictionary
+medium = { #Ryan's Dictionary
     1: ["able","busy","elder","garlic","holy"],
     2: ["awkward","british","confused","feline","perfume"],
     3: ["burden","boolean","critic","murder","trashcan"],
@@ -17,7 +20,7 @@ level_2 = { #Ryan's Dictionary
     5: ["velvet","magnet","enrich","hectic","banish"]
 }
 
-level_3 = { #Nathaniel's Dictionary
+hard = {
     1: ["animal", "behavior", "confident" ], 
     2: ["accurate", "ambition", "businessman", "customer"],
     3: ["emphasis", "explorer", "forcible", "fertilize", "heritage" ],
@@ -25,8 +28,20 @@ level_3 = { #Nathaniel's Dictionary
     5: ["maintenance", "nominate", "novelist", "numeric", "quintuplet"]
 }
 
-def challenge_player(dictionary, numWins) -> dict:
-    pass
+
+def randomiser(difficulty, wins):
+    current_list = difficulty[wins+1]
+    random.shuffle(current_list)
+    return current_list
+      
+def Countdown(t):
+    t=10
+    while t:
+        mins, secs=divmod(t,60)
+        timer='{:02d}:{:02d}'.format( mins, secs)
+        print(timer, end="\r")
+        time.sleep(1)
+        t-=1
 
 def filter(response) -> list:
     invalid_symbols = ['!', ',', '@', '#', '%', "^", "*", '$', '&', '?', '.', "'", '"', "-", "/"]
@@ -83,11 +98,11 @@ def alzheimerGame() -> None:
 
             match int(choice):
                 case 1:
-                    difficulty = level_1
+                    difficulty = easy
                 case 2:
-                    difficulty = level_2
+                    difficulty = medium
                 case 3:
-                    difficulty = level_3
+                    difficulty = hard
                 case _:
                     tc.clearScreen()
                     print("\nThat is not a valid difficulty.")
@@ -96,7 +111,7 @@ def alzheimerGame() -> None:
             tc.resetColor()
             print("You have chosen difficulty {}.".format(choice))
 
-        challenge_player(difficulty, numWins)
+        randomiser(difficulty, numWins)
         isInputCorrect = verify(difficulty, numWins)
         
         if not isInputCorrect:
