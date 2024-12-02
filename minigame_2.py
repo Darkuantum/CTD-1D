@@ -25,19 +25,19 @@ level_3 = { #Nathaniel's Dictionary
     5: ["maintenance", "nominate", "novelist", "numeric", "quintuplet"]
 }
 
-def challenge_player() -> dict:
+def challenge_player(dictionary, numWins) -> dict:
     pass
 
 def filter(response) -> list:
     invalid_symbols = ['!', ',', '@', '#', '%', "^", "*", '$', '&', '?', '.']
-    response_list = response #define reesponse_list is the same as response
+    response_list = response #define response_list is the same as response
 
     for i in invalid_symbols: #Sort out all the additional symbols for error
         response_list = response_list.replace(i, "") #sort and remove alll ineligible symbols 
     response_list = response_list.split() #take the response_list and split it based of the spaces " "
     return response_list
     
-def verify(dictionary) -> bool:
+def verify(dictionary, numWins) -> bool:
     message_dict = { 
                 1: "Zoom zoom, that just flew past you. I didn't see a thing?", 
                 2: "Did you see that? Are you sure you can rememeber?",
@@ -56,25 +56,24 @@ def verify(dictionary) -> bool:
     response = input("What did you see?\n").lower() #lowercase the input
     cleaned_response = filter(response) #Send to clean the response 
 
-    print('you responded with', cleaned_response) 
+    print('You responded with', cleaned_response) 
 
-    if dictionary == cleaned_response: #check if the test_list == response_list is correct.
+    if dictionary[numWins + 1] == cleaned_response: #check if the test_list == response_list is correct.
         return True #adjust this to the condition you are looking for
     else:
         return False #adjust this to the condition that you are looking for 
         
 def alzheimerGame() -> None:
     lives = 3
-    num_of_wins = 0
+    numWins = 0
     isGameOver = False
-    level = None
+    difficulty = None
 
     tc = TermControl()
 
+    print("Welcome to the Alzheimer memory word game.")
     while not isGameOver:
-        print("Welcome to the Alzheimer game.")
-
-        while level == None:
+        while difficulty == None:
             choice = input("Please enter a number to choose the game difficulty you would like to play:\n\t1. Easy\n\t2. Medium\n\t3. Hard\n")
 
             if not choice.isdigit():
@@ -95,20 +94,31 @@ def alzheimerGame() -> None:
                     continue
             
             tc.resetColor()
-            print("You have chosen difficulty {}.".format(difficulty))
+            print("You have chosen difficulty {}.".format(choice))
 
-        challenge_player(difficulty, num_of_wins)
-        isInputCorrect = verify(difficulty, num_of_wins)
+        challenge_player(difficulty, numWins)
+        isInputCorrect = verify(difficulty, numWins)
         
         if not isInputCorrect:
             lives -= 1
             tc.changeColor("red")
-            print("You just lost 1 live, your current lives is {}.".format(lives))
+            print("You just lost 1 life, your current lives is {}.".format(lives))
             tc.resetColor()
         else:
-            num_of_wins += 1
+            numWins += 1
             tc.changeColor("green")
             print("You answered correctly, proceed to the next stage.")
+            tc.resetColor()
+        
+        if lives == 0:
+            isGameOver = True
+            tc.changeColor("red")
+            print("You have lost the game")
+            tc.resetColor()
+        elif numWins == 5:
+            isGameOver = True
+            tc.changeColor("yellow")
+            print("You have won! Congratulations!")
             tc.resetColor()
 
 def main() -> None:
