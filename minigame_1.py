@@ -1,4 +1,5 @@
 import AddictionMonster as am
+import time
 '''
 this portion consists of the relevant variables, data types and functions that are need for the object instantiation, 
 namely: 
@@ -35,29 +36,34 @@ def sight_debuff(question):
     encrypted_question += encryption_dict.get(letter, letter)
   return input(encrypted_question)
 
-
-
+'''
+this portion is the introduction to the game
+'''
 '''
 this portion is the instantiation of objects from the AddictionMonster class which will create a "monster" 
 for 3 main vices - alcohol, gambling and smoking.
 <addiction name> = new AddictionMonster()
 '''
 
-### alcohol monster 
-
-
-
-
 
 gambling =  am.AddictionMonster('gambling_monster')
 gambling_battle = gambling.battle(qna, debuff_dict,sight_debuff)
 
 if gambling_battle: 
+    print("Moving on to the next battle....")
     alcohol =  am.AddictionMonster('alcohol_monster')
     alcohol_battle = alcohol.battle(qna, debuff_dict,sight_debuff)
     if alcohol_battle:
+        print("Moving on to the next battle....")
         smoking =  am.AddictionMonster('smoke_monster')
-        smoking.battle(qna, debuff_dict,sight_debuff)
+        smoking_battle = smoking.battle(qna, debuff_dict,sight_debuff)
+        if smoking_battle:
+           time.sleep(10)
+           print("You have successfully beaten your addictions! You're free!")
+        else:
+            smoking_battle
+    else:
+       alcohol_battle
 else:
    gambling_battle
     
