@@ -5,14 +5,14 @@ class AddictionMonster:
         self.monster_hp = monster_hp
         self.player_hp = player_hp
 
-    def battle(self, qna, debuff_dd, debuff_fn, lives):
+    def battle(self, qna: dict, debuff_dd: dict, debuffFn, lives: int):
         """
         Conducts a battle between the player and the monster.
 
         Parameters:
         - qna: Dictionary containing questions and answers for all monsters.
         - debuff_dd: Dictionary with the debuff flag.
-        - debuff_fn: Function to apply the debuff if needed.
+        - debuffFn: Function to apply the debuff if needed.
         - lives: Remaining player lives.
 
         Returns:
@@ -26,7 +26,7 @@ class AddictionMonster:
         for question_text, correct_answer in questions_and_answers:
             # Apply debuff if active
             if debuff_dd['sight']:
-                player_answer = debuff_fn(question_text)
+                player_answer = debuffFn(question_text)
             else:
                 player_answer = input(f'{question_text}:\n').strip().lower()
 
@@ -34,6 +34,7 @@ class AddictionMonster:
             if player_answer == correct_answer:
                 debuff_dd['sight'] = False  # Disable debuff on correct answer
                 self.monster_hp -= 20
+                
                 print(f"Correct! Monster HP: {self.monster_hp}, Player HP: {self.player_hp}, Lives: {lives}")
             else:
                 debuff_dd['sight'] = True  # Enable debuff on incorrect answer
