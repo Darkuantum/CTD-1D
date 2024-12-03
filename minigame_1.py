@@ -1,17 +1,14 @@
 import AddictionMonster as am
+from TermControl import TermControl
 import time
 '''
-this portion consists of the relevant variables, data types and functions that are need for the object instantiation, 
-namely: 
-    - lives 
+variables, and data types required, namely: 
     - encryption dictionary 
     - question and answer (qna) dictionary 
     - debuff flag dictionary - used because the flag itself is only mutable inside of a dictionary 
     - sight debuff function 
 '''
-# encryption dictionary - required for the debuff function 
-encryption_dict = {'a': '@', 'b': '6', 'c': '(', 'e': '€', 'f': '£', 'g': '&', 'i': '!', 'j': '?', 'k': '<', 'l': '1', 'o': '0', 'q': '9', 's': '$', 't': '7', 'v': '^', 'x': '*', 'y': '¥', 'z': '2'}
-# question and answer dictionary with 3 levels of nesting 
+ 
 qna = {
     "smoke_monster": [
         ("Is vaping is good for you?", "no"),
@@ -36,45 +33,66 @@ qna = {
     ],
 }
 
-# debuff flag in the form of a dictionary lol 
-debuff_dict = {'sight' : True}
+encryption_dict = {
+    'a': '@',
+    'b': '6',
+    'c': '(',
+    'e': '€',
+    'f': '£',
+    'g': '&',
+    'i': '!',
+    'j': '?',
+    'k': '<',
+    'l': '1',
+    'o': '0',
+    'q': '9',
+    's': '$',
+    't': '7',
+    'v': '^',
+    'x': '*',
+    'y': '¥',
+    'z': '2',
+}
 
-def sight_debuff(question):
-  '''this function implements a debuff in sight for the player by encrypting the question'''
+ 
+debuff_dict = {'sight' : True} # debuff flag in the form of a dictionary lol
+
+
+
+tc = TermControl() # instance to change colour of text in terminal
+
+def sightDebuff(question) -> str:
+  '''applies a debuff by encrypting the question if needed'''
   encrypted_question = ''
   for letter in question.lower():
     encrypted_question += encryption_dict.get(letter, letter)
   return input(f'{encrypted_question}:\n').strip().lower()
 
-'''
-this portion is the introduction to the game
-'''
-'''
-this portion is the instantiation of objects from the AddictionMonster class which will create a "monster" 
-for 3 main vices - alcohol, gambling and smoking.
-<addiction name> = new AddictionMonster()
-'''
-
-
-# List of monsters in order of battles
-# Initial lives
-lives = 3
-
-# List of monsters in order of battles
-monster_names = ['gambling_monster', 'alcohol_monster', 'smoke_monster']
-
 # Iterate through each monster and initiate the battles
-for monster_name in monster_names:
-    monster = am.AddictionMonster(monster_name)
-    battle_won, lives = monster.battle(qna, debuff_dict, sight_debuff, lives)
-    if not battle_won:
-        if lives <= 0:
-            print("You have no more lives. Game Over.")
-            break
+def addictionGame() -> None:
+    monster_names = ['gambling_monster', 'alcohol_monster', 'smoke_monster'] # List of monsters in order of battles
+    lives = 3
+    for monster_name in monster_names:
+        monster = am.AddictionMonster(monster_name)
+        isBattleWon, lives = monster.battle(qna, debuff_dict, sightDebuff, lives)
+        if not isBattleWon:
+            if lives == 0:
+                tc.changeColor("red")
+                print("You have no more lives. Game Over.")
+                tc.resetColor()
+                break
+        else:
+            tc.changeColor("green")
+            print(f"Congratulations! You defeated the {monster_name}. Moving on to the next battle...")
+            tc.resetColor()
     else:
-        print(f"Congratulations! You defeated the {monster_name}. Moving on to the next battle...")
-else:
-    print("You have successfully beaten all the monsters! You're free!")
+        tc.changeColor("yellow")
+        print("You have successfully beaten all the monsters! You're free!")
+        tc.resetColor()
 
+def main() -> None:
+    addictionGame()
 
+if __name__ == "__main__":
+    main()
     
