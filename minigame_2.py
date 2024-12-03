@@ -1,12 +1,11 @@
 import random 
 import time
-from TermControl import TermControl
+from TermControl import TermControl # Self made class to control the terminal colors and clear the screen
 import random
 from copy import deepcopy
 
+# Creates a Terminal Control object to control the terminal colors and to clear the screen
 tc = TermControl()
-
-# TODO: Comments to document the whole document
 
 easy = { #Nathan's Dictionary
     1: ["blue", "sky"],
@@ -32,11 +31,16 @@ hard = { #Nathaniel's Dictionary
     5: ["maintenance", "nominate", "novelist", "numeric", "quintuplet"]
 }
 
+# Shuffle the prompt's word order,
+# taking the difficulty dict and numWins int as arguments,
+# and returning a shuffled list as output
 def randomiser(difficulty, numWins) -> list:
     current_list = deepcopy(difficulty[numWins+1])
     random.shuffle(current_list)
     return current_list
       
+# Timer counting down for the player to memorise the word order,
+# before clearing the screen
 def countdown(t) -> None:
     print("Memorize the order of the words before the timer runs out.")
     while t:
@@ -46,6 +50,8 @@ def countdown(t) -> None:
         time.sleep(1)
         t-=1
 
+# Prints the correct prompts and displays the timer before clearing the screen
+# and printing the shuffled prompts
 def print_prompts(dictionary, numWins, timer) -> None:
     tc.changeColor("cyan")
     print(dictionary[numWins + 1])
@@ -55,6 +61,7 @@ def print_prompts(dictionary, numWins, timer) -> None:
     print(randomiser(dictionary, numWins))
     tc.resetColor()
 
+# Cleans the user inputs by removing some invalid symbols
 def filter(response) -> list:
     invalid_symbols = ['!', ',', '@', '#', '%', "^", "*", '$', '&', '?', '.', "'", '"', "-", "/"]
     response_list = response #define response_list is the same as response
@@ -64,6 +71,8 @@ def filter(response) -> list:
     response_list = response_list.split() #take the response_list and split it based of the spaces " "
     return response_list
     
+# Asks for user input and evaluates if the user input matches the correct prompt,
+# will return a boolean based on wether it is True or False
 def verify(dictionary, numWins) -> bool:
     message_dict = { 
                 1: "Zoom zoom, that just flew past you. I didn't see a thing?", 
@@ -89,7 +98,8 @@ def verify(dictionary, numWins) -> bool:
         return True #adjust this to the condition you are looking for
     else:
         return False #adjust this to the condition that you are looking for 
-        
+
+# Main function of the module, implementing the global variables and the main game loop 
 def alzheimerGame() -> None:
     lives = 3
     numWins = 0
@@ -127,7 +137,8 @@ def alzheimerGame() -> None:
 
         print_prompts(difficulty, numWins, timer)
         isInputCorrect = verify(difficulty, numWins)
-        
+
+        # Update game state such as lives and numWins based on correct or incorrect inputs 
         if not isInputCorrect:
             lives -= 1
             tc.changeColor("red")
@@ -139,6 +150,7 @@ def alzheimerGame() -> None:
             print("You answered correctly, proceed to the next stage.")
             tc.resetColor()
         
+        # Check if from the game state on whether the player has won or not, and will terminate the game
         if lives == 0:
             isGameOver = True
             tc.changeColor("red")
