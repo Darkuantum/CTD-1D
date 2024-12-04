@@ -1,6 +1,8 @@
 import AddictionMonster as am
 from TermControl import TermControl
-import time
+# TODO: documentation for each function 
+# TODO: optimize addicitionGame, it looks like shit rn  
+
 '''
 variables, and data types required, namely: 
     - encryption dictionary 
@@ -8,23 +10,23 @@ variables, and data types required, namely:
     - debuff flag dictionary - used because the flag itself is only mutable inside of a dictionary 
     - sight debuff function 
 '''
- 
+
 qna = {
-    "smoke_monster": [
+    "Smoke Monster": [
         ("Is vaping is good for you?", "no"),
         ("Does vaping lead to nicotine addiction?", "yes"),
         ("Is second-hand smoking harmful to non-smokers?", "yes"),
         ("Does smoking increase the risk of heart disease?", "yes"),
         ("Is nicotine-free vaping completely safe?", "no"),
     ],
-    "gambling_monster": [
+    "Gambling Monster": [
         ("Does gambling addiction affect a person's mental health?", "yes"),
         ("Is it true that gambling can strain personal relationships?", "yes"),
         ("Is online gambling always regulated and fair?", "no"),
         ("Are all forms of gambling completely free of risk?", "no"),
         ("Does gambling guarantee consistent financial gains?", "no"),
     ],
-    "alcohol_monster": [
+    "Alcohol Monster": [
         ("Can alcohol impair judgment and coordination?", "yes"),
         ("Is it safe to drink alcohol during pregnancy?", "no"),
         ("Can binge drinking lead to alcohol poisoning?", "yes"),
@@ -33,6 +35,7 @@ qna = {
     ],
 }
 
+# dictionary where the letter in the alphabet (key) maps to its encrypted counterpart (value). used in sightDebuff() functioin.
 encryption_dict = {
     'a': '@',
     'b': '6',
@@ -58,8 +61,7 @@ encryption_dict = {
 debuff_dict = {'sight' : True} # debuff flag in the form of a dictionary lol
 
 
-
-tc = TermControl() # instance to change colour of text in terminal
+tc = TermControl() # creates a Terminal Control object to control the terminal colors and to clear the screen
 
 def sightDebuff(question) -> str:
   '''applies a debuff by encrypting the question if needed'''
@@ -68,30 +70,85 @@ def sightDebuff(question) -> str:
     encrypted_question += encryption_dict.get(letter, letter)
   return input(f'{encrypted_question}:\n').strip().lower()
 
-# Iterate through each monster and initiate the battles
-def addictionGame() -> None:
-    monster_names = ['gambling_monster', 'alcohol_monster', 'smoke_monster'] # List of monsters in order of battles
-    lives = 3
-    for monster_name in monster_names:
-        monster = am.AddictionMonster(monster_name)
-        isBattleWon, lives = monster.battle(qna, debuff_dict, sightDebuff, lives)
-        if not isBattleWon:
-            if lives == 0:
-                tc.changeColor("red")
-                print("You have no more lives. Game Over.")
-                tc.resetColor()
-                break
-        else:
-            tc.changeColor("green")
-            print(f"Congratulations! You defeated the {monster_name}. Moving on to the next battle...")
-            tc.resetColor()
+def gameStart() -> bool:
+    '''this function prints the introduction and checks if the player is ready to start the game.'''
+    intro_msg = input(
+        "Welcome to Disgustingly Good.\n"
+        "Here, you will be fighting against your vices - Alcohol, Smoking, and Gambling,\n"
+        "so that you may be free of your addictions.\n"
+        "Are you ready? (yes/no)\n"
+    )
+    if intro_msg[0] == 'y' or intro_msg == 'Y':
+        return True 
     else:
+        return False 
+
+# Iterate through each monster and initiate the battles
+def addictionBattle() -> None:
+    """
+    Conducts a sequence of battles against addiction monsters using a while loop.
+    The player wins if they defeat all 3 monsters (numWins == 3), and loses if they run out of lives.
+    """
+    monster_names = ['Gambling Monster', 'Alcohol Monster', 'Smoke Monster']  # List of monsters
+    lives = 3  # Player starts with 3 lives
+    numWins = 0  # Initialize win counter
+    current_monster_index = 0  # Start with the first monster
+
+    while lives > 0 and numWins < 3:
+        # Get the current monster
+        monster_name = monster_names[current_monster_index]
+        monster = am.AddictionMonster(monster_name)
+
+        # Start the battle
+        isBattleWon, lives = monster.battle(qna, debuff_dict, sightDebuff, lives)
+
+        # Check battle result
+        if isBattleWon:
+            numWins += 1
+            tc.changeColor("green")
+            print(f"Congratulations! You defeated the {monster_name}.")
+            tc.resetColor()
+        else:
+            tc.changeColor("red")
+            print(f"You lost the battle against {monster_name}.")
+            tc.resetColor()
+
+        # Move to the next monster or break
+        current_monster_index += 1
+        if current_monster_index >= len(monster_names):
+            break
+
+    # Game outcome
+    if numWins == 3:
         tc.changeColor("yellow")
         print("You have successfully beaten all the monsters! You're free!")
         tc.resetColor()
+    elif lives == 0:
+        tc.changeColor("red")
+        print("You have no more lives. Game Over.")
+        tc.resetColor()
+    else: 
+        tc.changeColor("magenta")
+        print(f"You beat {lives} out of {len(monster_names)} monsters.\n"
+              "Nice job, but we know you can do better.\n"
+              "Try again! (or don't, you have free will)."
+              )
+        tc.resetColor()
+
+def addictionGame() -> None:
+    isPlayerReady = gameStart()
+    if isPlayerReady:
+        addictionBattle()
+    else:
+        print(
+            "Seems like you actually aren't ready, or you can't type a simple yes or no without making a mistake,\n"
+            "in which case you definitely aren't ready for this game.\n"
+            "Try again."
+            )
 
 def main() -> None:
     addictionGame()
+
 
 if __name__ == "__main__":
     main()
