@@ -28,7 +28,7 @@ Documentation of the game
 
 **tc = TermmControl** - 
  
-![Difficulty Library]({6C7B11BF-F2AC-4870-870A-24D6687BD8F3}-2.png) - The dictionary is pulled to get the words for the user to memorise, it is also pulled to randomise to give it in random order for the user to know how to spell the words 
+![Difficulty Library]({img/6C7B11BF-F2AC-4870-870A-24D6687BD8F3}-2.png) - The dictionary is pulled to get the words for the user to memorise, it is also pulled to randomise to give it in random order for the user to know how to spell the words 
 
 **def randomiser (difficulty, numWins)** - This function is called to randomise the list in the dictionary, firstly it will take the current list that is being used, create a deepcopy of it to ensure that the dictionary is not modified, randomise the contents in the listt. Then it returns the randomised list. 
 
