@@ -21,15 +21,17 @@ def number_memory_game():
     
         print(f'Round {round}. {total_no} numbers will be shown, and \033[31m{no_of_rand}\033[0m of them will be shown in \033[31mred\033[0m. You are to memorise the numbers shown in red. You have {timer} seconds to memorise the numbers. Good luck!')
 
+        print("[", end = "  ")
         for element in number_list: # for loop to print and display all the numbers in the number_list
             if element in rand_list:
                 tc.changeColor("red")
-                print(element, end = " ") # if the number is in the list of random numbers generated, the number will be printed in red colour
+                print(element, end = "  ") # if the number is in the list of random numbers generated, the number will be printed in red colour
                 tc.resetColor()
             else:
-                print(element, end = " ") # else all other numbers will be printed in white colour
+                print(element, end = "  ") # else all other numbers will be printed in white colour
+        print("]")
 
-        countdown(timer, tc)
+        countdown3(timer)
         tc.clearScreen()
 
         filtered_str = False
@@ -60,7 +62,7 @@ def number_memory_game():
         tc.changeColor("red")
         print('Game over!')
         tc.resetColor()
-        print('The red numbers are {rand_list}. \nYou have lost this round :( \nYou have won {round - 1} round(s). Good job! Try better next time!')')
+        print('The red numbers are {rand_list}. \nYou have lost this round :( \nYou have won {round - 1} round(s). Good job! Try better next time!')
 
 
 def generate_number_list(lower_bound, upper_bound): # create a list of integers running from lower_bound to upper_bound
@@ -115,15 +117,19 @@ def check_answer(user_answer, correct_answer): # check if player's response is c
     return True
 
 
-def countdown(t, tc):
+def countdown3(t):
     while t:
-        mins, secs = divmod(t,60)
-        timer ='{:02d}:{:02d}'.format( mins, secs)
-        tc.changeColor('green')
-        print(timer, end="\r")
+        mins, secs = divmod(t, 60)
+        timer ='{:02d}:{:02d}'.format(mins, secs)
+        tc.changeColor("green")
+        print(timer, end = "\r")
         tc.resetColor()
         time.sleep(1)
         t -= 1
 
 
-number_memory_game()
+
+def main():
+    number_memory_game()
+
+main()
