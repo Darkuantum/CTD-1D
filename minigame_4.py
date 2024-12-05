@@ -53,9 +53,11 @@ def number_memory_game():
     if continue_game:
         tc.changeColor("green")
         print(f'Game over! You have won {round - 1} rounds! Well done!')
+        tc.resetColor()
     else:
         tc.changeColor("red")
         print(f'Game over! The red numbers are {rand_list}. \nYou have lost this round :( You have won {round - 1} round(s). Try better next time!')
+        tc.resetColor()
 
 
 def generate_number_list(lower_bound, upper_bound): # create a list of integers running from lower_bound to upper_bound
@@ -117,3 +119,6 @@ def countdown(t):
         print(timer, end="\r")
         time.sleep(1)
         t -= 1
+
+
+number_memory_game()

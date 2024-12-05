@@ -107,15 +107,18 @@ def alzheimerGame() -> None:
     timer = 0
 
     print("Welcome to the Alzheimer memory word game.")
+    # Main game loop
     while not isGameOver:
         while difficulty == None:
             choice = input("Please enter a number to choose the game difficulty you would like to play:\n\t1. Easy\n\t2. Medium\n\t3. Hard\n")
 
+            # Reject any choices that are not digits
             if not choice.isdigit():
                 print("\nYou have not entered a number.")
                 tc.clearScreen()
                 continue
-
+            
+            # Sets the necessary variables for the game base on the chosen difficulty
             match int(choice):
                 case 1:
                     difficulty = easy
@@ -134,7 +137,9 @@ def alzheimerGame() -> None:
             tc.resetColor()
             print("You have chosen difficulty {}.".format(choice))
 
+        # Print the correct answers and with a countdown timer, then clears the screen and prints the shuffled words
         print_prompts(difficulty, numWins, timer)
+        # Prompt the user to enter the correct words, and check them with the answers
         isInputCorrect = verify(difficulty, numWins)
 
         # Update game state such as lives and numWins based on correct or incorrect inputs 
