@@ -34,6 +34,21 @@ class AddictionMonster:
             else:
                 player_answer = input(f'{question_text}(yes/no):\n').strip().lower()
 
+            # check if player's answer is valid (i.e. if it is 'yes' or 'no')
+            # continuously ask the player for their answer if their input is invalid.
+            valid = False
+            while not valid:
+                if player_answer == 'yes' or player_answer == 'no':
+                    valid = True
+                else:
+                    tc.changeColor('red')
+                    print("Your response is invalid. Please answer 'yes' or 'no'.")
+                    tc.resetColor()
+                    if debuff_dd['sight']:
+                        player_answer = debuffFn(question_text)
+                    else:
+                        player_answer = input(f'{question_text}(yes/no):\n').strip().lower()
+
             # check the player's answer
             if player_answer == correct_answer:
                 debuff_dd['sight'] = False  # disable debuff on correct answer
