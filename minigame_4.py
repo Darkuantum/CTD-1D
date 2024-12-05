@@ -12,7 +12,7 @@ def number_memory_game():
     upper_bound = 51 
     total_no = upper_bound - lower_bound # total number of numbers shown
     continue_game = True
-    round = 1 
+    round = 1
     timer = 10 # amount of time given for player to memorize the numbers
 
     while continue_game and no_of_rand < total_no/2: # while continue_game == True and the number of numbers to memorize is less than half of the total number of number shown, the game continues
@@ -39,21 +39,18 @@ def number_memory_game():
 
         user_answer_list = convert_str_to_list(filtered_str)
         continue_game = check_answer(user_answer_list, rand_list)
+        print('-----------------------------------------')
 
         if continue_game:
             print('Congratulations, you have won this round!')
             print('-----------------------------------------')
 
-        else:
-            break
-
-        no_of_rand += 5
-        round += 1
+            no_of_rand += 2 # as the player wins more rounds, the number of numbers to memorize will increase to increase the difficulty of the subsequent rounds
+            round += 1
 
     if continue_game:
         print(f'Game over! You have won {round - 1} rounds! Well done!')
     else:
-        print('-----------------------------------------')
         print(f'Game over! The red numbers are {rand_list}. \nYou have lost this round :( You have won {round - 1} round(s). Try better next time!')
 
 
@@ -111,8 +108,8 @@ def check_answer(user_answer, correct_answer): # check if player's response is c
 
 def countdown(t):
     while t:
-        mins, secs=divmod(t,60)
-        timer='{:02d}:{:02d}'.format( mins, secs)
+        mins, secs = divmod(t,60)
+        timer ='{:02d}:{:02d}'.format( mins, secs)
         print(timer, end="\r")
         time.sleep(1)
-        t-=1
+        t -= 1
