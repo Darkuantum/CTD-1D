@@ -2,7 +2,7 @@ import random
 import time
 from TermControl import TermControl # Self made class to control the terminal colors and clear the screen
 from copy import deepcopy
-#remove duplicated import random
+
 # Creates a Terminal Control object to control the terminal colors and to clear the screen
 tc = TermControl()
 
