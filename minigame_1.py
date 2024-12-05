@@ -1,7 +1,7 @@
 import AddictionMonster as am
 from TermControl import TermControl
 # TODO: documentation for each function 
-# TODO: 
+# TODO: do a check for invalid symbols 
 '''
 variables, and data types required, namely: 
     - encryption dictionary 
@@ -10,6 +10,13 @@ variables, and data types required, namely:
     - sight debuff function 
 '''
 
+'''
+dictionary of questions and answers for each monster:
+key : monster name 
+value : list of tuples
+    -   each tuple relates to one question, where the first element refers to the question, 
+        while the second element refers to the correct answer for that question
+'''
 qna = {
     "Smoke Monster": [
         ("Is vaping is good for you?", "no"),
@@ -34,7 +41,11 @@ qna = {
     ],
 }
 
-# dictionary where the letter in the alphabet (key) maps to its encrypted counterpart (value). used in sightDebuff() functioin.
+''' 
+dictionary where the letter in the alphabet (key) maps to its encrypted counterpart (value). 
+used in sightDebuff() functioin.
+'''
+
 encryption_dict = {
     'a': '@',
     'b': '6',
@@ -63,14 +74,18 @@ debuff_dict = {'sight' : True} # debuff flag in the form of a dictionary lol
 tc = TermControl() # creates a Terminal Control object to control the terminal colors and to clear the screen
 
 def sightDebuff(question) -> str:
-  '''applies a debuff by encrypting the question if needed'''
+  '''applies a debuff by encrypting the question if needed
+    returns the a filtered '''
   encrypted_question = ''
   for letter in question.lower():
     encrypted_question += encryption_dict.get(letter, letter)
   return input(f'{encrypted_question}(yes/no):\n').strip().lower()
 
 def gameStart() -> bool:
-    '''this function prints the introduction and checks if the player is ready to start the game.'''
+    '''this function prints the introduction and validates the input:
+
+        returns : strictly a boolean value - True for yes or False for no  
+    .'''
     intro_msg = input(
         "Welcome to Disgustingly Good.\n"
         "Here, you will be fighting against your vices - Alcohol, Smoking, and Gambling,\n"
@@ -86,7 +101,9 @@ def gameStart() -> bool:
 def addictionBattle() -> None:
     """
     Conducts a sequence of battles against addiction monsters using a while loop.
-    The player wins if they defeat all 3 monsters (numWins == 3), and loses if they run out of lives.
+    The player wins if they defeat all 3 monsters (numWins == 3), and loses if they run out of lives
+    
+    returns: strictly None type - the function is to the game battle's logic. see comments below for explanation
     """
     monster_names = ['Gambling Monster', 'Alcohol Monster', 'Smoke Monster']  # List of monsters
     lives = 3  # Player starts with 3 lives
@@ -135,6 +152,13 @@ def addictionBattle() -> None:
         tc.resetColor()
 
 def addictionGame() -> None:
+    ''' this fucntion is a validation check to see if the player is ready 
+        used to execute gameStart(). 
+
+        return: strictly a None type, goal is the execute the relevant functions in sequence
+        if gameStart() returned True, execute the game with addictionBattle(). 
+        else, print a funny message to try again 
+     '''
     isPlayerReady = gameStart()
     if isPlayerReady:
         addictionBattle()
@@ -146,9 +170,12 @@ def addictionGame() -> None:
             )
 
 def main() -> None:
+    '''
+    main function to call addictionGame()
+    '''
     addictionGame()
 
-
+# conditional statement to check if name is main, and then esecute the main()
 if __name__ == "__main__":
     main()
     
