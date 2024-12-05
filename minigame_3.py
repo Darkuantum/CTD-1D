@@ -124,7 +124,7 @@ def countdown3(t, tc):
         tc.changeColor("green")
         print(timer, end = "\r")
         tc.resetColor()
-        time.sleep(1)
+        sleep(1)
         t -= 1
 
 
