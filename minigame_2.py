@@ -1,9 +1,8 @@
 import random 
 import time
 from TermControl import TermControl # Self made class to control the terminal colors and clear the screen
-import random
 from copy import deepcopy
-
+#remove duplicated import random
 # Creates a Terminal Control object to control the terminal colors and to clear the screen
 tc = TermControl()
 
@@ -34,8 +33,8 @@ hard = { #Nathaniel's Dictionary
 # Shuffle the prompt's word order,
 # taking the difficulty dict and numWins int as arguments,
 # and returning a shuffled list as output
-def randomiser(difficulty, numWins) -> list:
-    current_list = deepcopy(difficulty[numWins+1])
+def randomiser(difficulty, numWins) -> list: # make it explicit that function should return a list
+    current_list = deepcopy(difficulty[numWins+1]) # deepcopy of difficulty function, to prevent any changes from difficulty to affect randomiser function
     random.shuffle(current_list)
     return current_list
       
@@ -44,26 +43,26 @@ def randomiser(difficulty, numWins) -> list:
 def countdown(t) -> None:
     print("Memorize the order of the words before the timer runs out.")
     while t:
-        mins, secs=divmod(t,60)
+        mins, secs=divmod(t,60) #tuple to divide t into 60; 60S to separate minutes and seconds
         timer='{:02d}:{:02d}'.format( mins, secs)
         print(timer, end="\r")
-        time.sleep(1)
-        t-=1
+        time.sleep(1)# delay 1s
+        t-=1# till t reach 0
 
 # Prints the correct prompts and displays the timer before clearing the screen
 # and printing the shuffled prompts
 def print_prompts(dictionary, numWins, timer) -> None:
-    tc.changeColor("cyan")
+    tc.changeColor("cyan")# from file TermControl # cyan for correct answer
     print(dictionary[numWins + 1])
     countdown(timer)
     tc.clearScreen()
     tc.changeColor("magenta")
-    print(randomiser(dictionary, numWins))
+    print(randomiser(dictionary, numWins))# magenta for randomised words
     tc.resetColor()
 
 # Cleans the user inputs by removing some invalid symbols
 def filter(response) -> list:
-    invalid_symbols = ['!', ',', '@', '#', '%', "^", "*", '$', '&', '?', '.', "'", '"', "-", "/"]
+    invalid_symbols = ['!', ',', '@', '#', '%', "^", "*", '$', '&', '?', '.', "'", '"', "-", "/"] # to omit symbols user may have accidentally typed
     response_list = response #define response_list is the same as response
 
     for i in invalid_symbols: #Sort out all the additional symbols for error
