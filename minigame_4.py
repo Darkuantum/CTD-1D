@@ -42,15 +42,19 @@ def number_memory_game():
         print('-----------------------------------------')
 
         if continue_game:
+            tc.changeColor("green")
             print('Congratulations, you have won this round!')
+            tc.resetColor()
             print('-----------------------------------------')
 
             no_of_rand += 2 # as the player wins more rounds, the number of numbers to memorize will increase to increase the difficulty of the subsequent rounds
             round += 1
 
     if continue_game:
+        tc.changeColor("green")
         print(f'Game over! You have won {round - 1} rounds! Well done!')
     else:
+        tc.changeColor("red")
         print(f'Game over! The red numbers are {rand_list}. \nYou have lost this round :( You have won {round - 1} round(s). Try better next time!')
 
 
