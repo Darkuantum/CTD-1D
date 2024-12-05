@@ -119,3 +119,6 @@ def countdown(t):
         print(timer, end="\r")
         time.sleep(1)
         t -= 1
+
+
+number_memory_game()
