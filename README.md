@@ -32,15 +32,15 @@ python3 main.py
 ## Project dependency tree
 
 ```mermaid
-graph TD;
-    minigame_1.py-->main.py;
-    minigame_2.py-->main.py;
-    minigame_3.py-->main.py;
-    AddictionMonster.py-->minigame_1.py;
-    TermControl.py-->minigame_1.py
-    TermControl.py-->minigame_2.py
-    TermControl.py-->minigame_3.py
-    TermControl.py-->AddictionMonster.py
+graph BT;
+    minigame_1.py-->|module|main.py;
+    minigame_2.py-->|module|main.py;
+    minigame_3.py-->|module|main.py;
+    AddictionMonster.py-->|class|minigame_1.py;
+    TermControl.py-->|class|minigame_1.py
+    TermControl.py-->|class|minigame_2.py
+    TermControl.py-->|class|minigame_3.py
+    TermControl.py-->|class|AddictionMonster.py
 ```
 
 ## Description for each mini-game
