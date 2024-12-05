@@ -29,7 +29,7 @@ def number_memory_game():
             else:
                 print(element, end = " ") # else all other numbers will be printed in white colour
 
-        countdown(timer)
+        countdown(timer, tc)
         tc.clearScreen()
 
         filtered_str = False
@@ -115,7 +115,7 @@ def check_answer(user_answer, correct_answer): # check if player's response is c
     return True
 
 
-def countdown(t):
+def countdown(t, tc):
     while t:
         mins, secs = divmod(t,60)
         timer ='{:02d}:{:02d}'.format( mins, secs)
@@ -125,5 +125,3 @@ def countdown(t):
         time.sleep(1)
         t -= 1
 
-
-number_memory_game()
