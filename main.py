@@ -10,7 +10,7 @@ def main():
 
     # Main App loop
     while not isExitApp:
-        choice = input("Choose a game to play by entering a number:\n\t1. Addiction Game\n\t2. Alzheimer Word Game\n\t3. Alzheimer Number Game\n\t4. Exit App\n")
+        choice = input("Choose a game to play by entering a number:\n\t1. Monster Battle Game\n\t2. Word Memory Game\n\t3. Number Memory Game\n\t4. Exit App\n")
 
         match choice:
             case "1":

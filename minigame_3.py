@@ -75,7 +75,8 @@ def countdown3(t):
 
 
 def number_memory_game():
-    
+    tc.clearScreen()
+
     no_of_rand = 5 # number of numbers to memorize in Round 1
     lower_bound = 1
     upper_bound = 51 
@@ -103,6 +104,7 @@ def number_memory_game():
 
         countdown3(timer)
         tc.clearScreen()
+        sleep(1)
 
         filtered_str = False
         while filtered_str == False: # while filtered_str == False, continue to ask the player for input
@@ -112,16 +114,18 @@ def number_memory_game():
 
         user_answer_list = convert_str_to_list(filtered_str)
         continue_game = check_answer(user_answer_list, rand_list)
-        print('-----------------------------------------')
+
+        tc.clearScreen()
 
         if continue_game:
-            tc.changeColor("green")
-            print('Congratulations, you have won this round!')
-            tc.resetColor()
-            print('-----------------------------------------')
-
             no_of_rand += 2 # as the player wins more rounds, the number of numbers to memorize will increase to increase the difficulty of the subsequent rounds
             round += 1
+            tc.changeColor("green")
+            print(f'Congratulations, you are correct! Get ready, round {round} is starting!')
+            tc.resetColor()
+            print('-----------------------------------------')
+            sleep(3)
+        
 
     if continue_game:
         tc.changeColor("green")
@@ -132,7 +136,9 @@ def number_memory_game():
         tc.changeColor("red")
         print('Game over!')
         tc.resetColor()
-        print(f'The red numbers are {rand_list}. \nYou have lost this round :( \nYou have won {round - 1} round(s). Good job! Try better next time!')
+        print(f'The red numbers are \033[94m{rand_list}\033[0m. Your response was \033[34m{user_answer_list}\033[0m \nYou have lost this round :( \nYou have won {round - 1} round(s). Good job! Try better next time! \n')
+        sleep(5))
+        tc.clearScreen()
 
 
 def main():
