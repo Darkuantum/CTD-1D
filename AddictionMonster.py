@@ -41,7 +41,9 @@ class AddictionMonster:
                 if player_answer == 'yes' or player_answer == 'no':
                     valid = True
                 else:
+                    tc.changeColor('red')
                     print("Your response is invalid. Please answer 'yes' or 'no'.")
+                    tc.resetColor()
                     if debuff_dd['sight']:
                         player_answer = debuffFn(question_text)
                     else:
