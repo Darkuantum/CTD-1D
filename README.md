@@ -29,6 +29,20 @@ Run the app.
 python3 main.py
 ```
 
+## Project dependency tree
+
+```mermaid
+graph TD;
+    minigame_1.py-->main.py;
+    minigame_2.py-->main.py;
+    minigame_3.py-->main.py;
+    AddictionMonster.py-->minigame_1.py;
+    TermControl.py-->minigame_1.py
+    TermControl.py-->minigame_2.py
+    TermControl.py-->minigame_3.py
+    TermControl.py-->AddictionMonster.py
+```
+
 ## Description for each mini-game
 
 ### Minigame 1
