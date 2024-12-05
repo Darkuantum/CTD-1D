@@ -138,4 +138,5 @@ def number_memory_game():
 def main():
     number_memory_game()
 
-main()
+if __name__ == "__main__":
+    main()
