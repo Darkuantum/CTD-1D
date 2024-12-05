@@ -137,7 +137,7 @@ def number_memory_game():
         print('Game over!')
         tc.resetColor()
         print(f'The red numbers are \033[94m{rand_list}\033[0m. Your response was \033[34m{user_answer_list}\033[0m \nYou have lost this round :( \nYou have won {round - 1} round(s). Good job! Try better next time! \n')
-        sleep(5))
+        sleep(5)
         tc.clearScreen()
 
 

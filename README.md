@@ -29,8 +29,9 @@ Run the app.
 python3 main.py
 ```
 
-## Project dependency tree
+## Project dependency flowchart
 
+Below is a dependency flowchart on how each modules in the project are related to each other as imports.
 ```mermaid
 graph BT;
     minigame_1.py-->|module|main.py;
@@ -60,10 +61,9 @@ Mini-game 2 runs through a set of words that requires the player to memorise wit
 
 `import random` - This library helps to select a random element from a sequence. <br/> 
 `import time` - This library allows the programmer to handle time-related operations. <br/>
-`from TermControl import TermControl` - This library helps to implement basic operations for analysis and design of a feedback control systems <br/>
-`from copy import deepcopy` - This helps to import the data from the library of copy and specifically the function deepcopy into 
-
-`tc = TermControl` - 
+`from TermControl import TermControl` - This library helps to implement basic operations for analysis and design of a feedback control systems. <br/>
+`from copy import deepcopy` - This helps to import the data from the library of copy and specifically the function deepcopy into. <br/>
+`tc = TermControl` - Creating an object from the class `TermControl` to handle terminal controls.
  
 ![Difficulty Library](./img/minigame_2-dicts.png) - The dictionary is pulled to get the words for the user to memorise, it is also pulled to randomise to give it in random order for the user to know how to spell the words 
 
