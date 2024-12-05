@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+from time import sleep
+>>>>>>> cad5b5f592ce9129051869b501b7a5d420227bba
 import random
 import time
 from TermControl import TermControl
@@ -127,6 +131,16 @@ def countdown3(t):
         time.sleep(1)
         t -= 1
 
+
+
+
+def difficulty_choice(easy, normal, hard):
+    print('Choose difficulty level:')
+    print('Easy Difficulty')
+    print('Normal Difficulty')
+    print('Hard Difficulty')
+    difficulty = str(input('Enter your difficulty choice here.'))
+    return difficulty
 
 
 def main():
