@@ -1,5 +1,5 @@
 # CTD-1D
-Team 7 - 3 Hard and Irresistable Games
+Team 07 - 3 Hard and Irresistable Games
 
 Members: Alexander Lee, Nathan Ly, Nathaniel Neo,  Roshan S/O Manogaran,  Vamshi Krishna, and Wong Guo Yao
 
