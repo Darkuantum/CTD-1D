@@ -32,7 +32,7 @@ class AddictionMonster:
             if debuff_dd['sight']:
                 player_answer = debuffFn(question_text)
             else:
-                player_answer = input(f'{question_text}:\n').strip().lower()
+                player_answer = input(f'{question_text}(yes/no):\n').strip().lower()
 
             # check the player's answer
             if player_answer == correct_answer:

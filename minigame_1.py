@@ -1,7 +1,7 @@
 import AddictionMonster as am
 from TermControl import TermControl
 # TODO: documentation for each function 
-
+# TODO: 
 '''
 variables, and data types required, namely: 
     - encryption dictionary 
@@ -67,7 +67,7 @@ def sightDebuff(question) -> str:
   encrypted_question = ''
   for letter in question.lower():
     encrypted_question += encryption_dict.get(letter, letter)
-  return input(f'{encrypted_question}:\n').strip().lower()
+  return input(f'{encrypted_question}(yes/no):\n').strip().lower()
 
 def gameStart() -> bool:
     '''this function prints the introduction and checks if the player is ready to start the game.'''
