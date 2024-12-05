@@ -60,14 +60,18 @@ def print_prompts(dictionary, numWins, timer) -> None:
     print(randomiser(dictionary, numWins))# magenta for randomised words
     tc.resetColor()
 
-# Cleans the user inputs by removing some invalid symbols
+# Cleans the user inputs by removing invalid characters
 def filter(response) -> list:
-    invalid_symbols = ['!', ',', '@', '#', '%', "^", "*", '$', '&', '?', '.', "'", '"', "-", "/"] # to omit symbols user may have accidentally typed
-    response_list = response #define response_list is the same as response
-
-    for i in invalid_symbols: #Sort out all the additional symbols for error
-        response_list = response_list.replace(i, "") #sort and remove alll ineligible symbols 
-    response_list = response_list.split() #take the response_list and split it based of the spaces " "
+    filtered_str = ''
+    response_list = []
+    for character in response:
+        if character == ',' or character.isspace(): # We allow spacing and commas
+            filtered_str += ' '
+        elif not character.isalpha(): # All other characters that are not alphabets will render the user's input invalid, and False will be returned for the while loop condition to continuously ask the user for their input
+            return False
+        else:
+            filtered_str += character
+    response_list = filtered_str.split() # Convert the filtered response into a list from a string
     return response_list
     
 # Asks for user input and evaluates if the user input matches the correct prompt,
@@ -89,9 +93,17 @@ def verify(dictionary, numWins) -> bool:
     message_choice = random.randint(1,10) #randomize the insult message
     print(message_dict[message_choice])
     response = input("What did you see?\n").lower() #lowercase the input
-    cleaned_response = filter(response) #Send to clean the response 
+    print(f"You've responded with {response}.")
 
-    print('You responded with', cleaned_response) 
+    cleaned_response = filter(response) #clean the response 
+    while cleaned_response == False: #if player's response contain symbols (except ',') or numbers, their input is invalid and they will be prompted to give their input again
+        tc.changeColor('red')
+        print('Your response is invalid. Please input only alphabets!')
+        tc.resetColor()
+        response = input("What did you see?\n").lower() #lowercase the input
+        print(f"You've responded with {response}.")
+        cleaned_response = filter(response) #clean the response 
+
 
     if dictionary[numWins + 1] == cleaned_response: #check if the test_list == response_list is correct.
         return True #adjust this to the condition you are looking for
@@ -106,7 +118,7 @@ def alzheimerGame() -> None:
     difficulty = None
     timer = 0
 
-    print("Welcome to the Alzheimer memory word game.")
+    print("Welcome to the Memory Word game!")
     # Main game loop
     while not isGameOver:
         while difficulty == None:
