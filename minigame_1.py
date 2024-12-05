@@ -1,7 +1,6 @@
 import AddictionMonster as am
 from TermControl import TermControl
 # TODO: documentation for each function 
-# TODO: optimize addicitionGame, it looks like shit rn  
 
 '''
 variables, and data types required, namely: 
@@ -78,7 +77,7 @@ def gameStart() -> bool:
         "so that you may be free of your addictions.\n"
         "Are you ready? (yes/no)\n"
     )
-    if intro_msg[0] == 'y' or intro_msg == 'Y':
+    if intro_msg[0] == 'y' or intro_msg[0] == 'Y':
         return True 
     else:
         return False 
