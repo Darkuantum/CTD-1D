@@ -65,13 +65,13 @@ def filter(response) -> list:
     filtered_str = ''
     response_list = []
     for character in response:
-        if character == ',' or character.isspace(): # We allow spacing and commas
+        if character == ',' or character.isspace(): # spacing and commas are allowed
             filtered_str += ' '
-        elif not character.isalpha(): # All other characters that are not alphabets will render the user's input invalid, and False will be returned for the while loop condition to continuously ask the user for their input
+        elif not character.isalpha(): # all other characters that are not alphabets will render the user's input invalid, and False will be returned for the while loop condition to continuously ask the user for their input
             return False
         else:
             filtered_str += character
-    response_list = filtered_str.split() # Convert the filtered response into a list from a string
+    response_list = filtered_str.split() # convert the filtered response into a list from a string
     return response_list
     
 # Asks for user input and evaluates if the user input matches the correct prompt,
@@ -95,7 +95,7 @@ def verify(dictionary, numWins) -> bool:
     response = input("What did you see?\n").lower() #lowercase the input
     print(f"You've responded with {response}.")
 
-    cleaned_response = filter(response) #clean the response 
+    cleaned_response = filter(response) #clean the user's response 
     while cleaned_response == False: #if player's response contain symbols (except ',') or numbers, their input is invalid and they will be prompted to give their input again
         tc.changeColor('red')
         print('Your response is invalid. Please input only alphabets!')
@@ -103,7 +103,6 @@ def verify(dictionary, numWins) -> bool:
         response = input("What did you see?\n").lower() #lowercase the input
         print(f"You've responded with {response}.")
         cleaned_response = filter(response) #clean the response 
-
 
     if dictionary[numWins + 1] == cleaned_response: #check if the test_list == response_list is correct.
         return True #adjust this to the condition you are looking for
