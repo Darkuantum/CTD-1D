@@ -145,7 +145,7 @@ Minigame 3 displays a set of integers, whereby the user is required to memorise 
 
 `checkAnswer(user_answer, correct_answer)` - Compares the player's response `user_answer` to the correct list of random integers `correct_answer`. Verifies if both lists are identical in content, regardless of order.
 
-`countdown3(t) -> None` - Displays a countdown timer in the terminal for t seconds, formatted as MM:SS. Updates the timer in real time.
+`countdown3(t) -> None` - Displays a countdown timer in the terminal for t seconds, formatted as MM:SS. Updates the timer in real time, simulating the countdown [5]
 
 `numberMemoryGame() -> None` - This function serves as the main logic for the entire game, handling the setup, progression, and termination. It starts by clearing the terminal screen using `tc.clearScreen()` to provide a clean interface. The function initializes several game parameters: the initial number of random numbers to memorize is set to 5 (`no_of_rand`), and the player is given 10 seconds to memorize them (`timer`). The range of numbers is defined between `lower_bound` (1) and `upper_bound` (51), creating a pool of 50 integers (`total_no`). A boolean variable `continue_game` is used to control the game loop, which begins at round 1 (`round = 1`).
 
