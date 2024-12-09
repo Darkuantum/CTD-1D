@@ -64,14 +64,15 @@ def printPrompts(dictionary, numWins, timer) -> None:
 # Filters the user's input by removing invalid characters
 def filter(response) -> list | bool:
     response_list = []
+    response_copy = ''
     for character in response:
         if character == ',': # commas are allowed
-            response.replace(',', ' ')
+            response_copy += ' '
         elif character.isalpha() or character.isspace(): 
-            continue 
+            response_copy += character 
         else: # all other characters that are not alphabets will render the user's input invalid 
             return False # False will be returned for the while loop condition to continuously ask the user for their input
-    response_list = response.split() # convert the filtered response into a list from a string
+    response_list = response_copy.split() # convert the filtered response into a list from a string
     return response_list
     
 # Asks for the user's input and evaluates if the user's input matches the correct prompt,

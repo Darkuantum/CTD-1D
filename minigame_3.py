@@ -31,13 +31,17 @@ def checkValid(str) -> str | bool:
     if len(str) == 0:
         print('You have not enter any values. Please enter integers.')
         return False
-    for i in str:
-        if i == ',':
-            str.replace(i, ' ')
+    
+    str_copy = ''
+    for character in str:
+        if character == ',':
+            str_copy += ' '
         elif not(i.isnumeric() or i.isspace() or i == '.'): # check if the string character is not a number, a space or a period
             print('You have entered an invalid input. Please enter only numbers.')
             return False  
-    return str
+        else:
+            str_copy += character
+    return str_copy
 
 
 # Create a list of floats from a string of numerical characters
