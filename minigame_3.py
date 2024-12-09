@@ -1,7 +1,7 @@
 import random
 from time import sleep
 from TermControl import TermControl # Custom class to control the text colors and to clear the screen
-import sys
+from getpass import getpass
 
 # Creates a Terminal Control object to control the text colors and to clear the screen
 tc = TermControl()
@@ -116,6 +116,7 @@ def numberMemoryGame() -> None:
         countdown3(timer)
         tc.clearScreen()
         sleep(1)
+        getpass(prompt = 'Press ENTER to continue.') # to clear the terminal in the event the user types something in the terminal
 
         # While loop to keep prompting the user for their input if it is invalid
         filtered_str = False
