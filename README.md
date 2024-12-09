@@ -61,36 +61,39 @@ This game is themed towards three addictions, specifically smoking/vaping, gambl
 
 `import random` - This library helps in generating random numbers and selecting random elements from a sequence, used to randomize question order. <br/>
 `from TermControl import TermControl` - This module provides terminal control functionality to change text color and clear the screen. <br/>
-`Class: AddictionMonster` - This class is used to manage the attributes and behavior of each addiction monster in the game. <br/>
-`init(self, name: str)` - Initializes the monster object with a name, starting health (100), and the player's starting health (100). <br/>
-`battle(self, qna_dict, debuff_dict, sightDebuff, lives) -> tuple[bool, int]` - Simulates a battle between the player and the monster. <br/>
+`class AddictionMonster:` - This class is used to manage the attributes and methods of each addiction monster in the game. <br/>
+`def __init__(self, name, monster_hp=100, player_hp=100):` - Initializes the monster object with a name, starting health (100), and the player's starting health (100). <br/>
+`def battle(self, qna: dict, debuff_dd: dict, debuffFn, lives: int):` - This function takes in 4 inputs:
+    * *qna*: Dictionary containing questions and answers for all monsters.
+    * *debuff_dd*: Dictionary with the debuff flag.
+    * *debuffFn*: Function to apply the debuff if needed.
+    * *lives*: Remaining player lives. 
 
-- `qna_dict` - Dictionary containing questions and answers for all monsters.
-- `debuff_dict` - Dictionary managing debuff status.
-- `sightDebuff` - Function to apply or remove the debuff on questions.
-- `lives` - The player's current life count.
-- Returns a tuple indicating if the battle was won and the updated life count.
-- If the player answers correctly, the monster loses health.
-- If the player answers incorrectly, the player loses health.
-- Handles invalid responses by prompting the user until valid input is provided.
+It then conducts a battle sequence between the player and the monster using a series of questions from the provided *qna* dictionary. The player must correctly answer 5 yes/no questions to defeat the monster while managing their remaining lives. The function uses the *debuff_dd* dictionary to track and apply debuffs through the *debuffFn* function when the player answers incorrectly. It returns a tuple: a boolean indicating whether the player won the battle and the updated number of lives.
 
-#### Minigame 1 (`main.py`) Documentation
+The function begins by introducing the monster battle and extracting the relevant questions for the monster based on its name. In a `for` loop, each question is presented to the player, applying a debuff if `debuff_dd['sight']` is active. The player's input is validated in a nested while loop to ensure only 'yes' or 'no' responses are accepted. Incorrect inputs prompt error messages in red text using `TermControl` (`tc`), while valid inputs are accepted as the player's answer
+
+If the player's answer is correct, the monster's health decreases by 20, the sight debuff is disabled (`debuff_dd['sight'] = False`), and progress is displayed. Else, incorrect answers reduce the player's health by 25, enable the sight debuff, and print updated stats. The function checks for win/lose conditions after each question: the player wins if the monster's health (`monster_hp`) reaches zero, and the player loses if their health (`player_hp`) drops to zero.
+
+If the player exhausts all questions without defeating the monster, they lose one life. A status message summarizes their performance, and color-coded feedback indicates whether lives remain or the game ends. The function concludes by returning the battle outcome (`True/False`) and the updated number of `Lives`. This comprehensive loop integrates player validation, debuff mechanics, and health tracking, forming a dynamic and interactive battle system. <br/>
+
+#### Minigame 1 (`minigame_1.py`) Documentation
 
 `from AddictionMonster import AddictionMonster` - Imports the AddictionMonster class to create and manage battles against addiction monsters. <br/>
 `from TermControl import TermControl` - Allows changing text colors and clearing the terminal screen during gameplay.
 
-Dictionaries <br/>
+**Dictionaries** <br/>
 `qna` - A dictionary mapping monster names to their respective questions and answers. <br/>
 `encryption_dict` - A dictionary defining how each letter is replaced during the "sight debuff." For example, 'a': '@', 'b': '6'. <br/>
 `debuff_dict` - Tracks the active status of the "sight debuff." Example: {'sight': True}. <br/>
 
-Functions
+**Functions** <br/>
 `sightDebuff(question) -> str` - this function takes in 1 input, *question*, and applies a debuff by encrypting the input if the value in `debuff_dict` in `False`. This is done using `encryption_dict`. It then returns the encrypted question as a prompt for the player to answer. 
 
 `gameStart() -> bool` - This function prints an introductory message for the game and validates the player's input. The player is asked whether they are ready to proceed, and the function returns `True` if the input starts with "y" or "Y" (indicating "yes"), and `False` otherwise.
 
 
-`addictionBattle() -> None` manages the game's core sequence of battles against addiction monsters. It iterates through a list of monster names (`['Gambling Monster', 'Alcohol Monster', 'Smoke Monster']`) and creates objects for each monster using the `AddictionMonster` class from `AddictionMonster.py`. The function calls the `.battle()` method from the `AddictionMonster` class to handle each encounter, adjusting the player's lives based on win/loss outcomes. Starting with 3 lives, the player aims to defeat all three monsters to win, with the game ending in failure if their lives reach zero. The function provides dynamic feedback using `TermControl` (`tc`) to display success, failure, or encouragement messages, with color-coded text. This `while` loop integrates battle logic, tracks progress, and determines the final outcome, forming the central gameplay experience.
+`addictionBattle() -> None` manages the game's core sequence of battles against addiction monsters. It iterates through a list of monster names (`monster_names`) and creates objects for each monster using the `AddictionMonster` class from `AddictionMonster.py`. The function calls the `.battle()` method from the `AddictionMonster` class to handle each encounter, adjusting the player's lives based on win/loss outcomes. Starting with 3 lives, the player aims to defeat all three monsters to win, with the game ending in failure if their lives reach zero. The function provides dynamic feedback using `TermControl` (`tc`) to display success, failure, or encouragement messages, with color-coded text. This `while` loop integrates battle logic, tracks progress, and determines the final outcome, forming the central gameplay experience.
 
 
 `addictionGame() -> None` - This function initiates the game itself, calling on `gameStart()` to validates if the player is ready to play. If `gameStart()` returns `True`, it calls 
