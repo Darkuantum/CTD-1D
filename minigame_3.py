@@ -71,7 +71,8 @@ def countdown3(t):
         t -= 1 
 
 
-def numberMemoryGame():
+# Main function of the module, implementing the global variables and the main game loop 
+def numberMemoryGame() -> None:
     tc.clearScreen()
 
     no_of_rand = 5 # number of numbers to memorize in Round 1
@@ -82,6 +83,7 @@ def numberMemoryGame():
     round = 1
     timer = 10 # amount of time given for player to memorize the numbers
 
+    # Main game loop    
     while continue_game and no_of_rand < total_no/2: # while continue_game == True and the number of numbers to memorize is less than half of the total number of number shown, the game continues
         
         # Create a list of all numbers and a list of random numbers
@@ -147,7 +149,7 @@ def numberMemoryGame():
         tc.clearScreen()
 
 
-def main():
+def main() -> None:
     numberMemoryGame()
 
 if __name__ == "__main__":
