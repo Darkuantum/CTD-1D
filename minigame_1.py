@@ -43,7 +43,7 @@ qna = {
 
 ''' 
 dictionary where the letter in the alphabet (key) maps to its encrypted counterpart (value). 
-used in sightDebuff() functioin.
+used in sightDebuff() function.
 '''
 
 encryption_dict = {
