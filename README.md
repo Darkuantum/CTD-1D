@@ -100,7 +100,7 @@ Returns True for a "yes" response and False for a "no" response. <br/>
 
 ### Minigame 2
 
-Mini-game 2 runs through a set of words that requires the player to memorise within a time limit, afterwards the words will appear and the user will have to type them in order. This is to help replicate the short term memory of a patient with Alzhimer which is directly linked to dementia. Each time the player gets the answer correct, it will go down a list of harder words based of the initial difficulty they have chosen. 
+Minigame 2 runs through a set of words that requires the user to memorise within a time limit, afterwards the words will appear and the user will have to type them in order. This is to help replicate the short term memory of a patient with dementia. Each time the user gets the answer correct, the game will go down a list of harder words based of the initial difficulty they have chosen. 
 
 **Minigame 2 documentation**
 
@@ -126,7 +126,9 @@ Mini-game 2 runs through a set of words that requires the player to memorise wit
 
 ### Minigame 3 
 
-## Decription of mini-game 3 
+Minigame 3 displays a set of integers, whereby the user is required to memorise the integers displayed in red colour within a time limit, afterwards all integers will disappear and the user will have to type them out. This is to help replicate the short term memory of a patient with dementia. Each time the user gets the answer correct, the total number of integers the user is required to memorize increases. 
+
+**Minigame 3 documentation**
 
 `generateNumberList(lower_bound, upper_bound)` - Creates a sequential list of integers from lower_bound to upper_bound (exclusive)
 
