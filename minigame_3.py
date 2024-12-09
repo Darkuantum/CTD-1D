@@ -119,6 +119,7 @@ def number_memory_game():
 
         if continue_game:
             no_of_rand += 2 # as the player wins more rounds, the number of numbers to memorize will increase to increase the difficulty of the subsequent rounds
+            timer += 2 # as the number of numbers to memorize increases, the amount of time given for memorizing the numbers increases as well
             round += 1
             tc.changeColor("green")
             print(f'Congratulations, you are correct! Get ready, round {round} is starting!')
