@@ -88,19 +88,19 @@ If the player exhausts all questions without defeating the monster, they lose on
 `debuff_dict` - Tracks the active status of the "sight debuff." Example: {'sight': True}. <br/>
 
 **Functions** <br/>
-`sightDebuff(question) -> str` - this function takes in 1 input, *question*, and applies a debuff by encrypting the input if the value in `debuff_dict` in `False`. This is done using `encryption_dict`. It then returns the encrypted question as a prompt for the player to answer. 
+`def sightDebuff(question) -> str` - this function takes in 1 input, *question*, and applies a debuff by encrypting the input if the value in `debuff_dict` in `False`. This is done using `encryption_dict`. It then returns the encrypted question as a prompt for the player to answer. 
 
-`gameStart() -> bool` - This function prints an introductory message for the game and validates the player's input. The player is asked whether they are ready to proceed, and the function returns `True` if the input starts with "y" or "Y" (indicating "yes"), and `False` otherwise.
-
-
-`addictionBattle() -> None` manages the game's core sequence of battles against addiction monsters. It iterates through a list of monster names (`monster_names`) and creates objects for each monster using the `AddictionMonster` class from `AddictionMonster.py`. The function calls the `.battle()` method from the `AddictionMonster` class to handle each encounter, adjusting the player's lives based on win/loss outcomes. Starting with 3 lives, the player aims to defeat all three monsters to win, with the game ending in failure if their lives reach zero. The function provides dynamic feedback using `TermControl` (`tc`) to display success, failure, or encouragement messages, with color-coded text. This `while` loop integrates battle logic, tracks progress, and determines the final outcome, forming the central gameplay experience.
+`def gameStart() -> bool` - This function prints an introductory message for the game and validates the player's input. The player is asked whether they are ready to proceed, and the function returns `True` if the input starts with "y" or "Y" (indicating "yes"), and `False` otherwise.
 
 
-`addictionGame() -> None` - This function initiates the game itself, calling on `gameStart()` to validates if the player is ready to play. If `gameStart()` returns `True`, it calls 
+`def addictionBattle() -> None` manages the game's core sequence of battles against addiction monsters. It iterates through a list of monster names (`monster_names`) and creates objects for each monster using the `AddictionMonster` class from `AddictionMonster.py`. The function calls the `.battle()` method from the `AddictionMonster` class to handle each encounter, adjusting the player's lives based on win/loss outcomes. Starting with 3 lives, the player aims to defeat all three monsters to win, with the game ending in failure if their lives reach zero. The function provides dynamic feedback using `TermControl` (`tc`) to display success, failure, or encouragement messages, with color-coded text. This `while` loop integrates battle logic, tracks progress, and determines the final outcome, forming the central gameplay experience.
 
-`addictionBattle()`. Otherwise, it exits with a humorous message.
 
-`main() -> None` - The `main` function is the entry point for the game. Calls `addictionGame()`.
+`def addictionGame() -> None` - This function initiates the game itself, calling on `gameStart()` to validates if the player is ready to play. If `gameStart()` returns `True`, it calls 
+
+`def addictionBattle()`. Otherwise, it exits with a humorous message.
+
+`def main() -> None` - The `main` function is the entry point for the game. Calls `addictionGame()`.
 
 `if __name__ == "__main__":` -  This conditional statement ensures the `main()` is executed only when run directly, allowing the code to be imported elsewhere without immediately starting the game.
 
