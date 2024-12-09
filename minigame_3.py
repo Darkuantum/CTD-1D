@@ -17,21 +17,24 @@ def generateNumberList(lower_bound, upper_bound) -> list:
 # Create a list of (no_of_random) random integers from a range of lower_bound to upper_bound - 1, with upper_bound - 1 included
 def generateRandList(no_of_rand, lower_bound, upper_bound) -> list: 
     rand_list = []
-    # While loop to ensure the list of random numbers generated do not contain duplicates 
+    # While loop to ensure the list of random integers generated do not contain duplicates 
     while len(rand_list) < no_of_rand: 
-        rand_no = random.randint(lower_bound, upper_bound - 1) # generates a random number between lower_bound and upper_bound, inclusive of lower_bound and exclusive of upper_bound
+        rand_no = random.randint(lower_bound, upper_bound - 1) # generates a random integer between lower_bound and upper_bound, inclusive of lower_bound and exclusive of upper_bound
         if rand_no not in rand_list:
             rand_list.append(rand_no)
     return rand_list
 
 
-# Check if a string contains only numbers and if the string is not empty
+# Check if a string contains only numbers and if the string is not empty,
+# and replaces any instances of a comma to a spacing
 def checkValid(str) -> str | bool:
     if len(str) == 0:
         print('You have not enter any values. Please enter integers.')
         return False
     for i in str:
-        if not(i.isnumeric() or i.isspace() or i == '.'): # check if the string character is not a number, a space or a period
+        if i == ',':
+            str.replace(',', ' ')
+        elif not(i.isnumeric() or i.isspace() or i == '.'): # check if the string character is not a number, a space or a period
             print('You have entered an invalid input. Please enter only numbers.')
             return False  
     return str
@@ -47,7 +50,7 @@ def convertStrToList(str) -> list:
     return float_list
 
 
-# Check if the player's response matches the list of random numbers
+# Check if the player's response matches the list of random integers
 def checkAnswer(user_answer, correct_answer) -> bool: 
     if len(user_answer) != len(correct_answer):
         return False
@@ -75,16 +78,16 @@ def countdown3(t):
 def numberMemoryGame() -> None:
     tc.clearScreen()
 
-    no_of_rand = 5 # number of numbers to memorize in Round 1
+    no_of_rand = 5 # number of integers to memorize in Round 1
     lower_bound = 1
     upper_bound = 51 
-    total_no = upper_bound - lower_bound # total number of numbers shown
+    total_no = upper_bound - lower_bound # total number of integers shown
     continue_game = True
     round = 1
     timer = 10 # amount of time given for player to memorize the numbers
 
     # Main game loop    
-    while continue_game and no_of_rand < total_no/2: # while continue_game == True and the number of numbers to memorize is less than half of the total number of number shown, the game continues
+    while continue_game and no_of_rand < total_no/2: # while continue_game == True and the number of integers to memorize is less than half of the total number of integers shown, the game continues
         
         # Create a list of all numbers and a list of random numbers
         number_list = generateNumberList(lower_bound, upper_bound) 
@@ -92,7 +95,7 @@ def numberMemoryGame() -> None:
     
         print(f'Round {round}. {total_no} numbers will be shown, and \033[31m{no_of_rand}\033[0m of them will be shown in \033[31mred\033[0m. You are to memorise the numbers shown in red. You have {timer} seconds to memorise the numbers. Good luck!')
 
-        # Display the numbers, with the random numbers displpayed in red and the others in white
+        # Display the integers, with the random integers displpayed in red and the others in white
         print("[", end = "  ")
         for element in number_list: # for loop to print and display all the numbers in the number_list
             if element in rand_list:
@@ -123,8 +126,8 @@ def numberMemoryGame() -> None:
 
         # If the user's answer is correct
         if continue_game:
-            no_of_rand += 2 # as the user wins more rounds, the number of numbers to memorize will increase to increase the difficulty of the subsequent rounds
-            timer += 2 # as the total number of numbers to memorize increases, the amount of time given for memorizing the numbers increases as well
+            no_of_rand += 2 # as the user wins more rounds, the number of integers to memorize will increase to increase the difficulty of the subsequent rounds
+            timer += 2 # as the total number of integers to memorize increases, the amount of time given for memorizing the numbers increases as well
             round += 1
             tc.changeColor("green")
             print(f'Congratulations, you are correct! Get ready, round {round} is starting!')
@@ -132,7 +135,7 @@ def numberMemoryGame() -> None:
             print('-----------------------------------------')
             sleep(3)
         
-    # If the game ends only when the number of numbers to memorize has increased to half of the total number of numbers displayed
+    # If the game ends only when the number of integers to memorize has increased to half of the total number of integers displayed
     if continue_game:
         tc.changeColor("green")
         print('Game over!')
