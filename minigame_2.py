@@ -109,7 +109,7 @@ def verify(dictionary, numWins) -> bool:
         return False #adjust this to the condition that you are looking for 
 
 # Main function of the module, implementing the global variables and the main game loop 
-def alzheimerGame() -> None:
+def wordMemoryGame() -> None:
     lives = 3
     numWins = 0
     isGameOver = False
@@ -177,7 +177,7 @@ def alzheimerGame() -> None:
             tc.resetColor()
 
 def main() -> None:
-    alzheimerGame()
+    wordMemoryGame()
 
 if __name__ == "__main__":
     main()

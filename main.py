@@ -1,6 +1,6 @@
 # Importing all the different minigames as modules from the other python files.
 from minigame_1 import addictionGame
-from minigame_2 import alzheimerGame
+from minigame_2 import wordMemoryGame
 from minigame_3 import number_memory_game
 
 # Menu for the overall app, allows the user to choose which game to play, or to exit the app.
@@ -16,7 +16,7 @@ def main():
             case "1":
                 addictionGame()
             case "2":
-                alzheimerGame()
+                wordMemoryGame()
             case "3":
                 number_memory_game()
             case "4":
