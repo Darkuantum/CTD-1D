@@ -148,3 +148,30 @@ Mini-game 2 runs through a set of words that requires the player to memorise wit
 `def alzheimerGame() -> None:` - This is the function for mini-game 2. It will first ask for the users difficulty and adjust the timing accordingly, then it will prompt the user for its input, if the input is not correct the user will lose a life, if the user loses all lives the user automatically loses. If the user is correct, the user will move forward to the next stage. After the game is over, the user wil move back to the main game. 
 
 ### Minigame 3 
+
+## Decription of mini-game 3 
+~
+--------------------------
+`generate_number_list(lower_bound, upper_bound)` - Creates a sequential list of integers from lower_bound to upper_bound (exclusive)
+
+`generate_rand_lists(lower_bound, upper_bound)` - Generates a list of no_of_rand unique random integers within the range `[lower_bound, upper_bound]` (inclusive). Ensures no duplicates.
+
+`check_if_valid(str)` - Checks whether a given string contains only valid numeric characters, spaces, or periods. Ensures the string is not empty and provides feedback for invalid input.
+
+`convert_str_to_list)` - Converts a validated string of numbers (separated by spaces) into a list of floats.
+
+`check_answer(user_answer, correct_answer)` - Compares the player's response `user_answer` to the correct list `correct_answer`. Verifies if both lists are identical in content, regardless of order.
+
+`countdown3(t)` - Displays a countdown timer in the terminal for t seconds, formatted as MM:SS. Updates the timer in real time.
+
+`number_memory_game()` - The **`number_memory_game()`** function serves as the main logic for the entire game, handling the setup, progression, and termination. It starts by clearing the terminal screen using `tc.clearScreen()` to provide a clean interface. The function initializes several game parameters: the initial number of random numbers to memorize is set to 5 (`no_of_rand`), and the player is given 10 seconds to memorize them (`timer`). The range of numbers is defined between `lower_bound` (1) and `upper_bound` (51), creating a pool of 50 numbers (`total_no`). A boolean variable `continue_game` is used to control the game loop, which begins at round 1 (`round = 1`).
+
+The game runs in a `while` loop, which continues as long as `continue_game` remains `True` (indicating the player’s answers are correct) and the number of numbers to memorize is less than half of the total pool (`total_no / 2`). Inside the loop, the function generates a sequential list of numbers within the range using `generate_number_list()` and selects a specified number of random numbers using `generate_rand_list()`. These random numbers are displayed to the player, with selected numbers highlighted in red using `tc.changeColor("red")` and non-highlighted numbers displayed in default white.
+
+The player is given a fixed amount of time, determined by the `timer`, to memorize the highlighted numbers. This countdown is displayed using the `countdown3()` function, which updates the timer in real time. Once the countdown ends, the screen is cleared with `tc.clearScreen()` to hide the numbers, and the game proceeds to validate the player's input. The player is prompted to input the numbers they memorized, and their response is checked for validity using `check_if_valid()`. The game repeatedly asks for input until the player provides a valid response.
+
+Once the input is validated, it is converted into a list of floats using `convert_str_to_list()`. The player's answer is then compared to the correct numbers using the `check_answer()` function, which checks if both lists match in content regardless of order. If the player's response is correct, the game advances to the next round. The difficulty increases as the number of numbers to memorize (`no_of_rand`) is incremented by 2, and the memorization time (`timer`) is increased by 2 seconds. The round counter (`round`) is also incremented, and a congratulatory message is displayed using green-colored text to inform the player that the next round is starting.
+
+If the player provides an incorrect response, the game ends. The correct numbers and the player’s input are displayed, along with a message encouraging them to try again. The game then outputs the total number of rounds completed as the final score. If the player successfully completes all rounds, a "Game Over" message in green congratulates them on their achievement. Throughout the function, terminal controls like `tc.clearScreen()`, `tc.changeColor()`, and `tc.resetColor()` are used to enhance the visual experience, making the game more interactive and user-friendly.
+
+`main()` - This execute the `number_memory_game()`
