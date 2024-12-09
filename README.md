@@ -48,24 +48,24 @@ graph BT;
     TermControl.py-->|class|AddictionMonster.py
 ```
 
-## Description for each mini-game
+## Description for each minigame
 
 
-## Description of AddictionMonster + Minigame 1:
+### Description of AddictionMonster + Minigame 1:
 
-### Scenario:
 This game is aimed with the ojective of raising awareness on different mental illnesses through the trial of gaming. This is to help raise awareness for people and to give an insight on how certain mental illnesses can affect an individual. This software will be providing 3 different mini-games. Our reason for this game is our friend Justin  who has a problem with dealing with his vices. He is unable to understand how his vices are destroying his physical and mental health, as well as his loved ones around him. Hence, we aim to give him a better understanding of his actions.
 Description of the game:
 
 This game is themed towards three addictions, specifically smoking/vaping, gambling and alcohol. The manner of the game is a Q/A structure with yes/no questions. To make it challenging and fun, each addiction scenario takes the form of a monster, and the player will have limited lives while 'battling them'. Each wrong answer will also give a surprise debuff to the players ability to answer the next question, and getting it correct will remove the debuff. If all lives are lost, the player will lose against the monsters and can retry the game.
 
-## Documentation Of AddictionMonster:
+### AddictionMonster Class:
 
-`import random` - This library helps in generating random numbers and selecting random elements from a sequence, used to randomize question order.
-`from TermControl import TermControl` - This module provides terminal control functionality to change text color and clear the screen.
-`Class: AddictionMonster` - This class is used to manage the attributes and behavior of each addiction monster in the game.
-`init(self, name: str)` - Initializes the monster object with a name, starting health (100), and the player's starting health (100).
-`battle(self, qna_dict, debuff_dict, sightDebuff, lives) -> tuple[bool, int]` - Simulates a battle between the player and the monster.
+`import random` - This library helps in generating random numbers and selecting random elements from a sequence, used to randomize question order. <br/>
+`from TermControl import TermControl` - This module provides terminal control functionality to change text color and clear the screen. <br/>
+`Class: AddictionMonster` - This class is used to manage the attributes and behavior of each addiction monster in the game. <br/>
+`init(self, name: str)` - Initializes the monster object with a name, starting health (100), and the player's starting health (100). <br/>
+`battle(self, qna_dict, debuff_dict, sightDebuff, lives) -> tuple[bool, int]` - Simulates a battle between the player and the monster. <br/>
+
 - `qna_dict` - Dictionary containing questions and answers for all monsters.
 - `debuff_dict` - Dictionary managing debuff status.
 - `sightDebuff` - Function to apply or remove the debuff on questions.
@@ -75,26 +75,27 @@ This game is themed towards three addictions, specifically smoking/vaping, gambl
 - If the player answers incorrectly, the player loses health.
 - Handles invalid responses by prompting the user until valid input is provided.
 
-## Documentation Of Minigame 1:
+### Minigame 1
 
-`from AddictionMonster import AddictionMonster` - Imports the AddictionMonster class to create and manage battles against addiction monsters.
+`from AddictionMonster import AddictionMonster` - Imports the AddictionMonster class to create and manage battles against addiction monsters. <br/>
 `from TermControl import TermControl` - Allows changing text colors and clearing the terminal screen during gameplay.
 
-Dictionaries
-`qna` - A dictionary mapping monster names to their respective questions and answers.
-`encryption_dict` - A dictionary defining how each letter is replaced during the "sight debuff." For example, 'a': '@', 'b': '6'.
-`debuff_dict` - Tracks the active status of the "sight debuff." Example: {'sight': True}.
+Dictionaries <br/>
+`qna` - A dictionary mapping monster names to their respective questions and answers. <br/>
+`encryption_dict` - A dictionary defining how each letter is replaced during the "sight debuff." For example, 'a': '@', 'b': '6'. <br/>
+`debuff_dict` - Tracks the active status of the "sight debuff." Example: {'sight': True}. <br/>
 
-Functions
-`sightDebuff(question: str) -> str` - Encrypts a question using encryption_dict if the sight debuff is active. Prompts the player to answer and returns the response.
+Functions <br/>
+`sightDebuff(question: str) -> str` - Encrypts a question using encryption_dict if the sight debuff is active. Prompts the player to answer and returns the response. <br/>
 `gameStart() -> bool` - Displays an introductory message and asks the player if they are ready.
-Returns True for a "yes" response and False for a "no" response.
-`addictionBattle() -> None` - Manages the sequence of battles with monsters.
+Returns True for a "yes" response and False for a "no" response. <br/>
+`addictionBattle() -> None` - Manages the sequence of battles with monsters. <br/>
 - Iterates through the list of monsters (['Gambling Monster', 'Alcohol Monster', 'Smoke Monster']).
 - Handles win/loss conditions by tracking the player's lives and wins.
 - Displays appropriate victory or defeat messages using TermControl.
-`addictionGame() -> None` - Validates if the player is ready to play. If gameStart() returns True, it calls addictionBattle(). Otherwise, it exits with a humorous message.
-`main() -> None` - Entry point for the game. Calls addictionGame().
+
+`addictionGame() -> None` - Validates if the player is ready to play. If gameStart() returns True, it calls addictionBattle(). Otherwise, it exits with a humorous message. <br/>
+`main() -> None` - Entry point for the game. Calls addictionGame(). <br/>
 `if name == "main":` -  This ensures the script is executed only when run directly, allowing the code to be imported elsewhere without immediately starting the game.
 
 ### Minigame 2
