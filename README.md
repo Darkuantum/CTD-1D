@@ -50,16 +50,14 @@ graph BT;
 
 ## Description for each minigame
 
-
-### Description of AddictionMonster + Minigame 1:
+### Minigame 1:
 
 This game is aimed with the ojective of raising awareness on different mental illnesses through the trial of gaming. This is to help raise awareness for people and to give an insight on how certain mental illnesses can affect an individual. This software will be providing 3 different mini-games. Our reason for this game is our friend Justin  who has a problem with dealing with his vices. He is unable to understand how his vices are destroying his physical and mental health, as well as his loved ones around him. Hence, we aim to give him a better understanding of his actions.
 Description of the game:
 
 This game is themed towards three addictions, specifically smoking/vaping, gambling and alcohol. The manner of the game is a Q/A structure with yes/no questions. To make it challenging and fun, each addiction scenario takes the form of a monster, and the player will have limited lives while 'battling them'. Each wrong answer will also give a surprise debuff to the players ability to answer the next question, and getting it correct will remove the debuff. If all lives are lost, the player will lose against the monsters and can retry the game.
 
-## Documentation Of `AddictionMonster.py`:
-### AddictionMonster Class:
+#### Minigame 1 (`AddictionMonster.py`) Documentation:
 
 `import random` - This library helps in generating random numbers and selecting random elements from a sequence, used to randomize question order. <br/>
 `from TermControl import TermControl` - This module provides terminal control functionality to change text color and clear the screen. <br/>
@@ -76,7 +74,7 @@ This game is themed towards three addictions, specifically smoking/vaping, gambl
 - If the player answers incorrectly, the player loses health.
 - Handles invalid responses by prompting the user until valid input is provided.
 
-### Minigame 1
+#### Minigame 1 (`main.py`) Documentation
 
 `from AddictionMonster import AddictionMonster` - Imports the AddictionMonster class to create and manage battles against addiction monsters. <br/>
 `from TermControl import TermControl` - Allows changing text colors and clearing the terminal screen during gameplay.
@@ -108,7 +106,7 @@ Functions
 
 Minigame 2 runs through a set of words that requires the user to memorise within a time limit, afterwards the words will appear and the user will have to type them in order. This is to help replicate the short term memory of a patient with dementia. Each time the user gets the answer correct, the game will go down a list of harder words based of the initial difficulty they have chosen. 
 
-**Minigame 2 documentation**
+#### Minigame 2 Documentation
 
 `import random` - This library helps to select a random element from a sequence. <br/> 
 `import time` - This library allows the programmer to handle time-related operations. <br/>
@@ -134,7 +132,7 @@ Minigame 2 runs through a set of words that requires the user to memorise within
 
 Minigame 3 displays a set of integers, whereby the user is required to memorise the integers displayed in red colour within a time limit, afterwards all integers will disappear and the user will have to type them out. This is to help replicate the short term memory of a patient with dementia. Each time the user gets the answer correct, the total number of integers the user is required to memorize increases. 
 
-**Minigame 3 documentation**
+#### Minigame 3 Documentation
 
 `generateNumberList(lower_bound, upper_bound)` - Creates a sequential list of integers from lower_bound to upper_bound (exclusive)
 

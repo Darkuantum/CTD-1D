@@ -19,7 +19,7 @@ class AddictionMonster:
         - lives: Remaining player lives.
 
         Returns:
-        - Tuple,Lives: (Boolean, int) -> (Did the player win this battle?, Remaining lives)
+        - Boolean, Lives: (Boolean, int) -> (Did the player win this battle?, Remaining lives)
         """
         questions_and_answers = qna[self.name]
 
