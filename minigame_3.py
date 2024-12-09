@@ -37,7 +37,7 @@ def checkValid(str) -> str | bool:
     for character in str:
         if character == ',':
             str_copy += ' '
-        elif not(character.isnumeric() or character.isspace() or i == '.'): # check if the string character is not a number, a space or a period
+        elif not(character.isnumeric() or character.isspace() or character == '.'): # check if the string character is not a number, a space or a period
             print('You have entered an invalid input. Please enter only numbers.')
             return False  
         else:
@@ -117,7 +117,7 @@ def numberMemoryGame() -> None:
         tc.clearScreen()
         sleep(1)
         print(' ')
-        
+
         # While loop to keep prompting the user for their input if it is invalid
         filtered_str = False
         while filtered_str == False: # while filtered_str == False, continue to ask the player for input
