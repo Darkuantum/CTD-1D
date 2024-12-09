@@ -1,7 +1,5 @@
 import AddictionMonster as am
 from TermControl import TermControl
-# TODO: documentation for each function 
-# TODO: do a check for invalid symbols 
 '''
 variables, and data types required, namely: 
     - encryption dictionary 
