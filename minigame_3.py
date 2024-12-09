@@ -5,7 +5,7 @@ from TermControl import TermControl
 tc = TermControl()
 
 
-# Create a list of integers running from lower_bound to upper_bound
+# Create a list of integers running from lower_bound to upper_bound, with upper_bound not included
 def generate_number_list(lower_bound, upper_bound):
     number_list = []
     for i in range(lower_bound, upper_bound):
@@ -13,11 +13,11 @@ def generate_number_list(lower_bound, upper_bound):
     return number_list
 
 
-# Create a list of (no_of_random) random integers from a range of lower_bound to upper_bound
+# Create a list of (no_of_random) random integers from a range of lower_bound to upper_bound - 1, with upper_bound - 1 included
 def generate_rand_list(no_of_rand, lower_bound, upper_bound): 
     rand_list = []
     while len(rand_list) < no_of_rand: # while loop to ensure the list of random numbers generated do not contain duplicates 
-        rand_no = random.randint(lower_bound, upper_bound)
+        rand_no = random.randint(lower_bound, upper_bound - 1) # generates a random number between lower_bound and upper_bound, inclusive of lower_bound and exclusive of upper_bound
         if rand_no not in rand_list:
             rand_list.append(rand_no)
     return rand_list
@@ -138,7 +138,7 @@ def number_memory_game():
         print('Game over!')
         tc.resetColor()
         print(f'The red numbers are \033[94m{rand_list}\033[0m. Your response was \033[34m{user_answer_list}\033[0m \nYou have lost this round :( \nYou have won {round - 1} round(s). Good job! Try better next time! \n')
-        sleep(5)
+        sleep(8)
         tc.clearScreen()
 
 
