@@ -99,7 +99,6 @@ Functions
 
 `main() -> None` - The `main` function is the entry point for the game. Calls `addictionGame()`.
 
-
 `if __name__ == "__main__":` -  This conditional statement ensures the `main()` is executed only when run directly, allowing the code to be imported elsewhere without immediately starting the game.
 
 ### Minigame 2
@@ -116,7 +115,7 @@ Minigame 2 runs through a set of words that requires the user to memorise within
  
 ![Difficulty Library](./img/minigame_2-dicts.png) - The dictionary is pulled based on the key input to get the words for the user to memorise, it is also pulled to randomise to give it in random order for the user to know how to spell the words 
 
-`def randomiser (difficulty, numWins) -> list` - This function is called to randomise the list in the dictionary, firstly it will take the current list that is being used, create a deepcopy of it to ensure that the dictionary is not modified, randomise the contents in the list. Then it returns the randomised list. 
+`def randomiser (difficulty, numWins)` - This function is called to randomise the list in the dictionary, firstly it will take the current list that is being used, create a deepcopy of it to ensure that the dictionary is not modified, randomise the contents in the list. Then it returns the randomised list. 
 
 `def countdown(t) -> None` - This function is called to set a timer that counts down to restrict the amount of time the user has to memorise the words. Firstly it takes the tuple and divide t into 60, then it is seperated into minutes and seconds. Afterwards it is printed to display to the user. Afterwards it will count until t (time) reaches 0. 
 
