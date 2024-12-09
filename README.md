@@ -58,7 +58,7 @@ Description of the game:
 
 This game is themed towards three addictions, specifically smoking/vaping, gambling and alcohol. The manner of the game is a Q/A structure with yes/no questions. To make it challenging and fun, each addiction scenario takes the form of a monster, and the player will have limited lives while 'battling them'. Each wrong answer will also give a surprise debuff to the players ability to answer the next question, and getting it correct will remove the debuff. If all lives are lost, the player will lose against the monsters and can retry the game.
 
-## Documentation Of AddictionMonster:
+## Documentation Of `AddictionMonster.py`:
 
 `import random` - This library helps in generating random numbers and selecting random elements from a sequence, used to randomize question order.
 `from TermControl import TermControl` - This module provides terminal control functionality to change text color and clear the screen.
@@ -85,16 +85,22 @@ Dictionaries
 `debuff_dict` - Tracks the active status of the "sight debuff." Example: {'sight': True}.
 
 Functions
-`sightDebuff(question: str) -> str` - Encrypts a question using encryption_dict if the sight debuff is active. Prompts the player to answer and returns the response.
-`gameStart() -> bool` - Displays an introductory message and asks the player if they are ready.
-Returns True for a "yes" response and False for a "no" response.
-`addictionBattle() -> None` - Manages the sequence of battles with monsters.
-- Iterates through the list of monsters (['Gambling Monster', 'Alcohol Monster', 'Smoke Monster']).
-- Handles win/loss conditions by tracking the player's lives and wins.
-- Displays appropriate victory or defeat messages using TermControl.
-`addictionGame() -> None` - Validates if the player is ready to play. If gameStart() returns True, it calls addictionBattle(). Otherwise, it exits with a humorous message.
-`main() -> None` - Entry point for the game. Calls addictionGame().
-`if name == "main":` -  This ensures the script is executed only when run directly, allowing the code to be imported elsewhere without immediately starting the game.
+`sightDebuff(question) -> str` - this function takes in 1 input, *question*, and applies a debuff by encrypting the input if the value in `debuff_dict` in `False`. This is done using `encryption_dict`. It then returns the encrypted question as a prompt for the player to answer. 
+
+`gameStart() -> bool` - This function prints an introductory message for the game and validates the player's input. The player is asked whether they are ready to proceed, and the function returns `True` if the input starts with "y" or "Y" (indicating "yes"), and `False` otherwise.
+
+
+`addictionBattle() -> None` manages the game's core sequence of battles against addiction monsters. It iterates through a list of monster names (`['Gambling Monster', 'Alcohol Monster', 'Smoke Monster']`) and creates objects for each monster using the `AddictionMonster` class from `AddictionMonster.py`. The function calls the `.battle()` method from the `AddictionMonster` class to handle each encounter, adjusting the player's lives based on win/loss outcomes. Starting with 3 lives, the player aims to defeat all three monsters to win, with the game ending in failure if their lives reach zero. The function provides dynamic feedback using `TermControl` (`tc`) to display success, failure, or encouragement messages, with color-coded text. This `while` loop integrates battle logic, tracks progress, and determines the final outcome, forming the central gameplay experience.
+
+
+`addictionGame() -> None` - This function initiates the game itself, calling on `gameStart()` to validates if the player is ready to play. If `gameStart()` returns `True`, it calls 
+
+`addictionBattle()`. Otherwise, it exits with a humorous message.
+
+`main() -> None` - The `main` function is the entry point for the game. Calls `addictionGame()`.
+
+
+`if __name__ == "__main__":` -  This conditional statement ensures the `main()` is executed only when run directly, allowing the code to be imported elsewhere without immediately starting the game.
 
 ### Minigame 2
 
