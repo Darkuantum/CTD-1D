@@ -1,11 +1,12 @@
 # CTD-1D
 Team 07 - 3 Hard and Irresistable Games
 
-Members: Alexander Lee, Nathan Ly, Nathaniel Neo,  Roshan S/O Manogaran,  Vamshi Krishna, and Wong Guo Yao
+Members: Alexander Lee, Nathan Ly, Nathaniel Neo, Roshan S/O Manogaran, Vamshi Krishna, and Wong Guo Yao
 
 # Description 
 
 Scenario: This game is aimed with the ojective of raising awareness on different mental illnesses through the trial of gaming. This is to help raise awareness for people and to give an insight on how certain mental illnesses can affect an individual. This software will be providing 3 different mini-games.
+
 ## Overview
 
 This app aims to raise awareness on different mental illnesses through the trial of gaming. This is to help raise awareness for people and to give an insight on how certain mental illnesses can affect an individual. This software will be providing 3 different mini-games.
@@ -145,7 +146,7 @@ Mini-game 2 runs through a set of words that requires the player to memorise wit
 
 `def verify (dictionary, numWins) -> bool:` - This function just stores the a `message_dict` that has 10 responses to prompt and taunt the user. It will then randomise the from the dictionary and print the message. Then it will wait for the response from the use, and reply back witht the user's response. While the cleaned_response is `False` it will change the color to red and then orint that the response is invalid. then it will ask the user to only input the alphabets. After this it will wait for a new response, then it will filter the response and put it back into the new variable. It then compares between the filtered response and the dictionary to check if the user is correct. If the user is correct it will return `True` else it will return `False` 
 
-`def alzheimerGame() -> None:` - This is the function for mini-game 2. It will first ask for the users difficulty and adjust the timing accordingly, then it will prompt the user for its input, if the input is not correct the user will lose a life, if the user loses all lives the user automatically loses. If the user is correct, the user will move forward to the next stage. After the game is over, the user wil move back to the main game. 
+`def wordMemoryGame() -> None:` - This is the function for mini-game 2. It will first ask for the users difficulty and adjust the timing accordingly, then it will prompt the user for its input, if the input is not correct the user will lose a life, if the user loses all lives the user automatically loses. If the user is correct, the user will move forward to the next stage. After the game is over, the user wil move back to the main game. 
 
 ### Minigame 3 
 
