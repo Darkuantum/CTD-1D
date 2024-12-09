@@ -93,7 +93,7 @@ def numberMemoryGame() -> None:
 
     # Main game loop    
     while continue_game and no_of_rand < total_no/2: # while continue_game == True and the number of integers to memorize is less than half of the total number of integers shown, the game continues
-        
+   
         # Create a list of all numbers and a list of random numbers
         number_list = generateNumberList(lower_bound, upper_bound) 
         rand_list = generateRandList(no_of_rand, lower_bound, upper_bound)
@@ -116,7 +116,7 @@ def numberMemoryGame() -> None:
         countdown3(timer)
         tc.clearScreen()
         sleep(1)
-        sys.stdout.flush()
+        print(' ')
         
         # While loop to keep prompting the user for their input if it is invalid
         filtered_str = False
