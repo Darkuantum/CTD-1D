@@ -1,12 +1,13 @@
 import random 
 import time
-from TermControl import TermControl # Self made class to control the terminal colors and clear the screen
+from TermControl import TermControl # Custom class to control the text colors and to clear the screen
 from copy import deepcopy
 
-# Creates a Terminal Control object to control the terminal colors and to clear the screen
+# Creates a Terminal Control object to control the text colors and to clear the screen
 tc = TermControl()
 
-easy = { #Nathan's Dictionary
+# Create dictionaries of words to shuffle
+easy = { 
     1: ["blue", "sky"],
     2: ["fear", "dark", "death"],
     3: ["pear", "young", "dad", "ground"],
@@ -14,7 +15,7 @@ easy = { #Nathan's Dictionary
     5: ["key", "dust", "drum", "jump", "bread", "grass"]
 }
 
-medium = { #Ryan's Dictionary
+medium = { 
     1: ["able","busy","elder","garlic","holy"],
     2: ["awkward","british","confused","feline","perfume"],
     3: ["burden","boolean","critic","murder","trashcan"],
@@ -22,7 +23,7 @@ medium = { #Ryan's Dictionary
     5: ["velvet","magnet","enrich","hectic","banish"]
 }
 
-hard = { #Nathaniel's Dictionary
+hard = { 
     1: ["animal", "behavior", "confident" ], 
     2: ["accurate", "ambition", "businessman", "customer"],
     3: ["emphasis", "explorer", "forcible", "fertilize", "heritage" ],
@@ -30,7 +31,7 @@ hard = { #Nathaniel's Dictionary
     5: ["maintenance", "nominate", "novelist", "numeric", "quintuplet"]
 }
 
-# Shuffle the prompt's word order,
+# Shuffle the order of words,
 # taking the difficulty dict and numWins int as arguments,
 # and returning a shuffled list as output
 def randomiser(difficulty, numWins) -> list: # make it explicit that function should return a list
@@ -41,27 +42,27 @@ def randomiser(difficulty, numWins) -> list: # make it explicit that function sh
 # Timer counting down for the player to memorise the word order,
 # before clearing the screen
 def countdown(t) -> None:
-    print("Memorize the order of the words before the timer runs out.")
-    while t:
-        mins, secs=divmod(t,60) #tuple to divide t into 60; 60S to separate minutes and seconds
-        timer='{:02d}:{:02d}'.format( mins, secs)
-        print(timer, end="\r")
-        time.sleep(1)# delay 1s
-        t-=1# till t reach 0
+    while t: # while t != 0
+        mins, secs = divmod(t,60) #tuple to divide t into 60; 60S to separate minutes and seconds
+        timer='{:02d}:{:02d}'.format(mins, secs)
+        print(timer, end = "\r")
+        time.sleep(1) # delay 1s
+        t -= 1 # let t run down to 0s
 
 # Prints the correct prompts and displays the timer before clearing the screen
 # and printing the shuffled prompts
-def print_prompts(dictionary, numWins, timer) -> None:
-    tc.changeColor("cyan")# from file TermControl # cyan for correct answer
+def printPrompts(dictionary, numWins, timer) -> None:
+    tc.changeColor("cyan") # from file TermControl # cyan for correct answer
     print(dictionary[numWins + 1])
+    print("Memorize the order of the words before the timer runs out.")
     countdown(timer)
     tc.clearScreen()
     tc.changeColor("magenta")
-    print(randomiser(dictionary, numWins))# magenta for randomised words
+    print(randomiser(dictionary, numWins)) # magenta for randomised words
     tc.resetColor()
 
-# Cleans the user inputs by removing invalid characters
-def filter(response) -> list:
+# Filters the user's input by removing invalid characters
+def filter(response) -> list | bool:
     response_list = []
     for character in response:
         if character == ',': # commas are allowed
@@ -73,8 +74,8 @@ def filter(response) -> list:
     response_list = response.split() # convert the filtered response into a list from a string
     return response_list
     
-# Asks for user input and evaluates if the user input matches the correct prompt,
-# will return a boolean based on wether it is True or False
+# Asks for the user's input and evaluates if the user's input matches the correct prompt,
+# will return a boolean based on whether it is it is a match or not
 def verify(dictionary, numWins) -> bool:
     message_dict = { 
                 1: "Zoom zoom, that just flew past you. I didn't see a thing?", 
@@ -89,24 +90,24 @@ def verify(dictionary, numWins) -> bool:
                 10: "Bing bang bongo, I can't believe I caught all that. Did you?"
     }
 
-    message_choice = random.randint(1,10) #randomize the insult message
+    message_choice = random.randint(1,10) # randomize the insult message
     print(message_dict[message_choice])
-    response = input("What did you see?\n").lower() #lowercase the input
+    response = input("What did you see?\n").lower() # lowercase the input
     print(f"You've responded with {response}.")
 
-    cleaned_response = filter(response) #clean the user's response 
-    while cleaned_response == False: #if player's response contain symbols (except ',') or numbers, their input is invalid and they will be prompted to give their input again
+    cleaned_response = filter(response) # create a filtered list of the user's input 
+    while cleaned_response == False: # if player's response contain symbols (except ',') or numbers, their input is invalid and they will be prompted to give their input again
         tc.changeColor('red')
         print('Your response is invalid. Please input only alphabets!')
         tc.resetColor()
-        response = input("What did you see?\n").lower() #lowercase the input
+        response = input("What did you see?\n").lower() # lowercase the input
         print(f"You've responded with {response}.")
-        cleaned_response = filter(response) #clean the response 
+        cleaned_response = filter(response) # filter the user's input 
 
-    if dictionary[numWins + 1] == cleaned_response: #check if the test_list == response_list is correct.
-        return True #adjust this to the condition you are looking for
+    if dictionary[numWins + 1] == cleaned_response: # check if the test_list == response_list is correct
+        return True 
     else:
-        return False #adjust this to the condition that you are looking for 
+        return False 
 
 # Main function of the module, implementing the global variables and the main game loop 
 def wordMemoryGame() -> None:
@@ -117,26 +118,23 @@ def wordMemoryGame() -> None:
     timer = 0
 
     print("Welcome to the Memory Word game!")
+
     # Main game loop
     while not isGameOver:
         while difficulty == None:
-            choice = input("Please enter a number to choose the game difficulty you would like to play:\n\t1. Easy\n\t2. Medium\n\t3. Hard\n")
 
-            # Reject any choices that are not digits
-            if not choice.isdigit():
-                print("\nYou have not entered a number.")
-                tc.clearScreen()
-                continue
+            choice = input("Please enter the number to select the game difficulty you would like to play:\n\t1. Easy\n\t2. Medium\n\t3. Hard\n")
             
             # Sets the necessary variables for the game base on the chosen difficulty
-            match int(choice):
-                case 1:
+            # and rejects any inputs that are invalid
+            match choice:
+                case "1":
                     difficulty = easy
                     timer = 10
-                case 2:
+                case "2":
                     difficulty = medium
                     timer = 8
-                case 3:
+                case "3":
                     difficulty = hard
                     timer = 5
                 case _:
@@ -148,7 +146,8 @@ def wordMemoryGame() -> None:
             print("You have chosen difficulty {}.".format(choice))
 
         # Print the correct answers and with a countdown timer, then clears the screen and prints the shuffled words
-        print_prompts(difficulty, numWins, timer)
+        printPrompts(difficulty, numWins, timer)
+
         # Prompt the user to enter the correct words, and check them with the answers
         isInputCorrect = verify(difficulty, numWins)
 
