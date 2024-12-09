@@ -116,7 +116,6 @@ def numberMemoryGame() -> None:
         countdown3(timer)
         tc.clearScreen()
         sleep(1)
-        print(' ')
 
         # While loop to keep prompting the user for their input if it is invalid
         filtered_str = False
