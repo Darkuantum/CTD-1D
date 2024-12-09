@@ -33,7 +33,7 @@ def checkValid(str) -> str | bool:
         return False
     for i in str:
         if i == ',':
-            str.replace(',', ' ')
+            str.replace(i, ' ')
         elif not(i.isnumeric() or i.isspace() or i == '.'): # check if the string character is not a number, a space or a period
             print('You have entered an invalid input. Please enter only numbers.')
             return False  
