@@ -114,6 +114,7 @@ Minigame 2 runs through a set of words that requires the user to memorise within
 `import time` - This library allows the programmer to handle time-related operations. <br/>
 `from TermControl import TermControl` - This library helps to implement basic operations for analysis and design of a feedback control systems. <br/>
 `from copy import deepcopy` - This helps to import the data from the library of copy and specifically the function deepcopy into. <br/>
+`from getpass import getpass` - This helps to import the function that prompts the user for an input without echoing. <br/>
 `tc = TermControl` - Creating an object from the class `TermControl` to handle terminal controls.
  
 ![Difficulty Library](./img/minigame_2-dicts.png) - The dictionary is pulled based on the key input to get the words for the user to memorise, it is also pulled to randomise to give it in random order for the user to know how to spell the words 
@@ -136,6 +137,11 @@ Minigame 2 runs through a set of words that requires the user to memorise within
 Minigame 3 displays a set of integers, whereby the user is required to memorise the integers displayed in red colour within a time limit, afterwards all integers will disappear and the user will have to type them out. This is to help replicate the short term memory of a patient with dementia. Each time the user gets the answer correct, the total number of integers the user is required to memorize increases. 
 
 #### Minigame 3 Documentation
+`import random` - This library helps to select a random element from a sequence. <br/> 
+`import time` - This library allows the programmer to handle time-related operations. <br/>
+`from TermControl import TermControl` - This library helps to implement basic operations for analysis and design of a feedback control systems. <br/>
+`from getpass import getpass` - This helps to import the function that prompts the user for an input without echoing. <br/>
+`tc = TermControl` - Creating an object from the class `TermControl` to handle terminal controls.
 
 `generateNumberList(lower_bound, upper_bound) -> list` - Creates a sequential list of integers from lower_bound to upper_bound (exclusive)
 

@@ -2,6 +2,7 @@ import random
 import time
 from TermControl import TermControl # Custom class to control the text colors and to clear the screen
 from copy import deepcopy
+from getpass import getpass
 
 # Creates a Terminal Control object to control the text colors and to clear the screen
 tc = TermControl()
@@ -44,7 +45,7 @@ def randomiser(difficulty, numWins) -> list: # make it explicit that function sh
 def countdown(t) -> None:
     while t: # while t != 0
         mins, secs = divmod(t,60) #tuple to divide t into 60; 60S to separate minutes and seconds
-        timer='{:02d}:{:02d}'.format(mins, secs)
+        timer = '{:02d}:{:02d}'.format(mins, secs)
         print(timer, end = "\r")
         time.sleep(1) # delay 1s
         t -= 1 # let t run down to 0s
@@ -57,6 +58,7 @@ def printPrompts(dictionary, numWins, timer) -> None:
     print("Memorize the order of the words before the timer runs out.")
     countdown(timer)
     tc.clearScreen()
+    getpass(prompt = 'Press ENTER to continue.') # to clear the terminal in the event the user types something in the terminal
     tc.changeColor("magenta")
     print(randomiser(dictionary, numWins)) # magenta for randomised words
     tc.resetColor()
