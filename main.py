@@ -4,7 +4,7 @@ from minigame_2 import wordMemoryGame
 from minigame_3 import numberMemoryGame
 
 # Menu for the overall app, allows the user to choose which game to play, or to exit the app.
-def main():
+def main() -> None:
 
     print("Welcome 3 Hard and Irresistable Game!")
     isExitApp = False

@@ -50,15 +50,14 @@ graph BT;
 
 ## Description for each minigame
 
-
-### Description of AddictionMonster + Minigame 1:
+### Minigame 1:
 
 This game is aimed with the ojective of raising awareness on different mental illnesses through the trial of gaming. This is to help raise awareness for people and to give an insight on how certain mental illnesses can affect an individual. This software will be providing 3 different mini-games. Our reason for this game is our friend Justin  who has a problem with dealing with his vices. He is unable to understand how his vices are destroying his physical and mental health, as well as his loved ones around him. Hence, we aim to give him a better understanding of his actions.
 Description of the game:
 
 This game is themed towards three addictions, specifically smoking/vaping, gambling and alcohol. The manner of the game is a Q/A structure with yes/no questions. To make it challenging and fun, each addiction scenario takes the form of a monster, and the player will have limited lives while 'battling them'. Each wrong answer will also give a surprise debuff to the players ability to answer the next question, and getting it correct will remove the debuff. If all lives are lost, the player will lose against the monsters and can retry the game.
 
-### AddictionMonster Class:
+#### Minigame 1 (`AddictionMonster.py`) Documentation:
 
 `import random` - This library helps in generating random numbers and selecting random elements from a sequence, used to randomize question order. <br/>
 `from TermControl import TermControl` - This module provides terminal control functionality to change text color and clear the screen. <br/>
@@ -75,7 +74,7 @@ This game is themed towards three addictions, specifically smoking/vaping, gambl
 - If the player answers incorrectly, the player loses health.
 - Handles invalid responses by prompting the user until valid input is provided.
 
-### Minigame 1
+#### Minigame 1 (`main.py`) Documentation
 
 `from AddictionMonster import AddictionMonster` - Imports the AddictionMonster class to create and manage battles against addiction monsters. <br/>
 `from TermControl import TermControl` - Allows changing text colors and clearing the terminal screen during gameplay.
@@ -85,24 +84,29 @@ Dictionaries <br/>
 `encryption_dict` - A dictionary defining how each letter is replaced during the "sight debuff." For example, 'a': '@', 'b': '6'. <br/>
 `debuff_dict` - Tracks the active status of the "sight debuff." Example: {'sight': True}. <br/>
 
-Functions <br/>
-`sightDebuff(question: str) -> str` - Encrypts a question using encryption_dict if the sight debuff is active. Prompts the player to answer and returns the response. <br/>
-`gameStart() -> bool` - Displays an introductory message and asks the player if they are ready.
-Returns True for a "yes" response and False for a "no" response. <br/>
-`addictionBattle() -> None` - Manages the sequence of battles with monsters. <br/>
-- Iterates through the list of monsters (['Gambling Monster', 'Alcohol Monster', 'Smoke Monster']).
-- Handles win/loss conditions by tracking the player's lives and wins.
-- Displays appropriate victory or defeat messages using TermControl.
+Functions
+`sightDebuff(question) -> str` - this function takes in 1 input, *question*, and applies a debuff by encrypting the input if the value in `debuff_dict` in `False`. This is done using `encryption_dict`. It then returns the encrypted question as a prompt for the player to answer. 
 
-`addictionGame() -> None` - Validates if the player is ready to play. If gameStart() returns True, it calls addictionBattle(). Otherwise, it exits with a humorous message. <br/>
-`main() -> None` - Entry point for the game. Calls addictionGame(). <br/>
-`if name == "main":` -  This ensures the script is executed only when run directly, allowing the code to be imported elsewhere without immediately starting the game.
+`gameStart() -> bool` - This function prints an introductory message for the game and validates the player's input. The player is asked whether they are ready to proceed, and the function returns `True` if the input starts with "y" or "Y" (indicating "yes"), and `False` otherwise.
+
+
+`addictionBattle() -> None` manages the game's core sequence of battles against addiction monsters. It iterates through a list of monster names (`['Gambling Monster', 'Alcohol Monster', 'Smoke Monster']`) and creates objects for each monster using the `AddictionMonster` class from `AddictionMonster.py`. The function calls the `.battle()` method from the `AddictionMonster` class to handle each encounter, adjusting the player's lives based on win/loss outcomes. Starting with 3 lives, the player aims to defeat all three monsters to win, with the game ending in failure if their lives reach zero. The function provides dynamic feedback using `TermControl` (`tc`) to display success, failure, or encouragement messages, with color-coded text. This `while` loop integrates battle logic, tracks progress, and determines the final outcome, forming the central gameplay experience.
+
+
+`addictionGame() -> None` - This function initiates the game itself, calling on `gameStart()` to validates if the player is ready to play. If `gameStart()` returns `True`, it calls 
+
+`addictionBattle()`. Otherwise, it exits with a humorous message.
+
+`main() -> None` - The `main` function is the entry point for the game. Calls `addictionGame()`.
+
+
+`if __name__ == "__main__":` -  This conditional statement ensures the `main()` is executed only when run directly, allowing the code to be imported elsewhere without immediately starting the game.
 
 ### Minigame 2
 
 Minigame 2 runs through a set of words that requires the user to memorise within a time limit, afterwards the words will appear and the user will have to type them in order. This is to help replicate the short term memory of a patient with dementia. Each time the user gets the answer correct, the game will go down a list of harder words based of the initial difficulty they have chosen. 
 
-**Minigame 2 documentation**
+#### Minigame 2 Documentation
 
 `import random` - This library helps to select a random element from a sequence. <br/> 
 `import time` - This library allows the programmer to handle time-related operations. <br/>
@@ -112,7 +116,7 @@ Minigame 2 runs through a set of words that requires the user to memorise within
  
 ![Difficulty Library](./img/minigame_2-dicts.png) - The dictionary is pulled based on the key input to get the words for the user to memorise, it is also pulled to randomise to give it in random order for the user to know how to spell the words 
 
-`def randomiser (difficulty, numWins)` - This function is called to randomise the list in the dictionary, firstly it will take the current list that is being used, create a deepcopy of it to ensure that the dictionary is not modified, randomise the contents in the list. Then it returns the randomised list. 
+`def randomiser (difficulty, numWins) -> list` - This function is called to randomise the list in the dictionary, firstly it will take the current list that is being used, create a deepcopy of it to ensure that the dictionary is not modified, randomise the contents in the list. Then it returns the randomised list. 
 
 `def countdown(t) -> None:` - This function is called to set a timer that counts down to restrict the amount of time the user has to memorise the words. Firstly it takes the tuple and divide t into 60, then it is seperated into minutes and seconds. Afterwards it is printed to display to the user. Afterwards it will count until t (time) reaches 0. 
 
@@ -128,7 +132,7 @@ Minigame 2 runs through a set of words that requires the user to memorise within
 
 Minigame 3 displays a set of integers, whereby the user is required to memorise the integers displayed in red colour within a time limit, afterwards all integers will disappear and the user will have to type them out. This is to help replicate the short term memory of a patient with dementia. Each time the user gets the answer correct, the total number of integers the user is required to memorize increases. 
 
-**Minigame 3 documentation**
+#### Minigame 3 Documentation
 
 `generateNumberList(lower_bound, upper_bound)` - Creates a sequential list of integers from lower_bound to upper_bound (exclusive)
 

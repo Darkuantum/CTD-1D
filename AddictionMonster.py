@@ -19,7 +19,7 @@ class AddictionMonster:
         - lives: Remaining player lives.
 
         Returns:
-        - Tuple,Lives: (Boolean, int) -> (Did the player win this battle?, Remaining lives)
+        - Boolean, Lives: (Boolean, int) -> (Did the player win this battle?, Remaining lives)
         """
         questions_and_answers = qna[self.name]
 
@@ -27,7 +27,7 @@ class AddictionMonster:
         print("Answer 5 yes/no questions correctly to defeat the monster.\n")
 
         # number of questions available
-        num_qns = len(qna)
+        num_qns = len(questions_and_answers) 
         correct_answers = 0
         for question_text, correct_answer in questions_and_answers:
             # apply debuff if active
