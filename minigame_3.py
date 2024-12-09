@@ -71,7 +71,7 @@ def countdown3(t):
         t -= 1 
 
 
-def numberMemoryGame():
+def numberMemoryGame() -> None:
     tc.clearScreen()
 
     no_of_rand = 5 # number of numbers to memorize in Round 1
@@ -147,7 +147,7 @@ def numberMemoryGame():
         tc.clearScreen()
 
 
-def main():
+def main() -> None:
     numberMemoryGame()
 
 if __name__ == "__main__":
