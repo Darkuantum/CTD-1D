@@ -54,10 +54,12 @@ def countdown(t) -> None:
 # and printing the shuffled prompts
 def printPrompts(dictionary, numWins, timer) -> None:
     tc.changeColor("cyan") # from file TermControl # cyan for correct answer
+    print("Memorize the exact order of the words shown before the timer runs out.")
+    time.sleep(3)
     print(dictionary[numWins + 1])
-    print("Memorize the order of the words before the timer runs out.")
     countdown(timer)
     tc.clearScreen()
+    print('')
     getpass(prompt = 'Press ENTER to continue.') # to clear the terminal in the event the user types something in the terminal
     tc.changeColor("magenta")
     print(randomiser(dictionary, numWins)) # magenta for randomised words
@@ -96,15 +98,15 @@ def verify(dictionary, numWins) -> bool:
     message_choice = random.randint(1,10) # randomize the insult message
     print(message_dict[message_choice])
     response = input("What did you see?\n").lower() # lowercase the input
-    print(f"You've responded with {response}.")
+    print(f"You've responded with [{response}].")
 
     cleaned_response = filter(response) # create a filtered list of the user's input 
     while cleaned_response == False: # if player's response contain symbols (except ',') or numbers, their input is invalid and they will be prompted to give their input again
         tc.changeColor('red')
-        print('Your response is invalid. Please input only alphabets!')
+        print('Your response is invalid. We want words only!')
         tc.resetColor()
         response = input("What did you see?\n").lower() # lowercase the input
-        print(f"You've responded with {response}.")
+        print(f"You've responded with [{response}].")
         cleaned_response = filter(response) # filter the user's input 
 
     if dictionary[numWins + 1] == cleaned_response: # check if the test_list == response_list is correct
@@ -126,7 +128,7 @@ def wordMemoryGame() -> None:
     while not isGameOver:
         while difficulty == None:
 
-            choice = input("Please enter the number to select the game difficulty you would like to play:\n\t1. Easy\n\t2. Medium\n\t3. Hard\n")
+            choice = input("Please enter the number to select the level of difficulty you would like to play:\n\t1. Easy\n\t2. Medium\n\t3. Hard\n")
             
             # Sets the necessary variables for the game base on the chosen difficulty
             # and rejects any inputs that are invalid
@@ -142,7 +144,7 @@ def wordMemoryGame() -> None:
                     timer = 5
                 case _:
                     tc.clearScreen()
-                    print("\nThat is not a valid difficulty.")
+                    print("\nThat is not a valid difficulty level.")
                     continue
             
             tc.resetColor()
@@ -158,24 +160,26 @@ def wordMemoryGame() -> None:
         if not isInputCorrect:
             lives -= 1
             tc.changeColor("red")
-            print("You just lost 1 life, your current lives is {}.".format(lives))
+            print("You have just lost 1 life, you have {} lives remaining.\n".format(lives))
             tc.resetColor()
+            time.sleep(3)
         else:
             numWins += 1
             tc.changeColor("green")
-            print("You answered correctly, proceed to the next stage.")
+            print("You answered correctly! Let's proceed to the next round.\n")
             tc.resetColor()
+            time.sleep(3)
         
         # Check if from the game state on whether the player has won or not, and will terminate the game
         if lives == 0:
             isGameOver = True
             tc.changeColor("red")
-            print("You have lost the game")
+            print("You have lost the game. :()")
             tc.resetColor()
         elif numWins == 5:
             isGameOver = True
             tc.changeColor("yellow")
-            print("You have won! Congratulations!")
+            print("You have won! Well done! :)")
             tc.resetColor()
 
 def main() -> None:

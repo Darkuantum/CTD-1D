@@ -75,7 +75,7 @@ def countdown3(t) -> None:
         tc.changeColor("green")
         print(timer, end = "\r") # display the timer at the start of the line
         tc.resetColor()
-        sleep(1) # delay the loop by one second
+        sleep(1) # delay the loop by one second for the countdown
         t -= 1 
 
 
@@ -98,7 +98,8 @@ def numberMemoryGame() -> None:
         number_list = generateNumberList(lower_bound, upper_bound) 
         rand_list = generateRandList(no_of_rand, lower_bound, upper_bound)
     
-        print(f'Round {round}. {total_no} numbers will be shown, and \033[31m{no_of_rand}\033[0m of them will be shown in \033[31mred\033[0m. You are to memorise the numbers shown in red. You have {timer} seconds to memorise the numbers. Good luck!')
+        print(f'Round {round}. {total_no} numbers will be shown, and \033[31m{no_of_rand}\033[0m of them will be shown in \033[31mred\033[0m. \nYou are to memorise the numbers shown in red. You have {timer} seconds to memorise the numbers. \nAre you ready? The game will be starting soon, good luck!')
+        sleep(5)
 
         # Display the integers, with the random integers displpayed in red and the others in white
         print("[", end = "  ")
@@ -115,13 +116,13 @@ def numberMemoryGame() -> None:
         # before clearing the screen
         countdown3(timer)
         tc.clearScreen()
-        sleep(1)
+        print('')
         getpass(prompt = 'Press ENTER to continue.') # to clear the terminal in the event the user types something in the terminal
 
         # While loop to keep prompting the user for their input if it is invalid
         filtered_str = False
         while filtered_str == False: # while filtered_str == False, continue to ask the player for input
-            user_answer_string = input('What were the numbers shown in red? Enter integers only and add a space after each number!')
+            user_answer_string = input('What were the numbers shown in \033[31mred\033[0m? Enter integers only and add a <space> to separate the numbers! \n')
             print('\n' + f'Your response: \033[94m[{user_answer_string}]\033[0m')
             filtered_str = checkValid(user_answer_string)
 
@@ -130,31 +131,32 @@ def numberMemoryGame() -> None:
 
         tc.clearScreen()
 
-        # If the user's answer is correct
+        # If the user has answered correctly
         if continue_game:
             no_of_rand += 2 # as the user wins more rounds, the number of integers to memorize will increase to increase the difficulty of the subsequent rounds
             timer += 2 # as the total number of integers to memorize increases, the amount of time given for memorizing the numbers increases as well
             round += 1
             tc.changeColor("green")
-            print(f'Congratulations, you are correct! Get ready, round {round} is starting!')
+            print(f'Congratulations, you are correct! Get ready, Round {round} is starting!')
             tc.resetColor()
-            print('-----------------------------------------')
             sleep(3)
         
-    # If the game ends only when the number of integers to memorize has increased to half of the total number of integers displayed
+    # If the user completes all the rounds
     if continue_game:
         tc.changeColor("green")
         print('Game over!')
         tc.resetColor()
-        print(f'You have won {round - 1} rounds! Well done!')
+        print(f"That's impressive! \nYou have won {round - 1} rounds! Well done!")
+        sleep(5)
+        tc.clearScreen()
 
-    # If the game ends due to the user's response being incorrect
+    # If the game ends due to the user's answer being incorrect
     else:
         tc.changeColor("red")
         print('Game over!')
         tc.resetColor()
-        print(f'The red numbers are \033[94m{rand_list}\033[0m. Your response was \033[34m{user_answer_list}\033[0m \nYou have lost this round :( \nYou have won {round - 1} round(s). Good job! Try better next time! \n')
-        sleep(8)
+        print(f'The red numbers are \033[94m{rand_list}\033[0m. Your response was \033[34m{user_answer_list}\033[0m. \nYou have lost this round :( \nYou have won a total of {round - 1} round(s). Good job! Try better next time!')
+        sleep(5)
         tc.clearScreen()
 
 
