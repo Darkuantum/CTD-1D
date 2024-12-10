@@ -77,9 +77,4 @@ class AddictionMonster:
             tc.changeColor('yellow')
             print(f"You answered {correct_answers} out of {num_qns} questions correctly. Remaining lives: {lives}.")
             tc.resetColor()
-        else:
-            tc.changeColor('red')
-            print("You are out of lives. Game Over!")
-            tc.resetColor()
-
         return False, lives
