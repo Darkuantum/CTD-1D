@@ -3,13 +3,16 @@ Team 07 - 3 Hard and Irresistable Games
 
 Members: Alexander Lee; Nathan Ly; Nathaniel Neo; Roshan S/O Manogaran; Thatikonda Venugopal Vamshi Krishna; Wong Guo Yao; Cheong Kai Jun Ryan
 
+
 # Description 
 
 Scenario: This game is aimed with the ojective of raising awareness on different mental illnesses through the trial of gaming. This is to help raise awareness for people and to give an insight on how certain mental illnesses can affect an individual. This software will be providing 3 different mini-games.
 
+
 ## Overview
 
 This app aims to raise awareness on different mental illnesses through the trial of gaming. This is to help raise awareness for people and to give an insight on how certain mental illnesses can affect an individual. This software will be providing 3 different mini-games.
+
 
 ## How to install and run the app
 
@@ -47,6 +50,7 @@ graph BT;
     TermControl.py-->|class|minigame_3.py
     TermControl.py-->|class|AddictionMonster.py
 ```
+
 
 ## Description for each minigame
 
@@ -92,9 +96,7 @@ If the player exhausts all questions without defeating the monster, they lose on
 
 `def gameStart() -> bool` - This function prints an introductory message for the game and validates the player's input. The player is asked whether they are ready to proceed, and the function returns `True` if the input starts with "y" or "Y" (indicating "yes"), and `False` otherwise.
 
-
 `def addictionBattle() -> None` manages the game's core sequence of battles against addiction monsters. It iterates through a list of monster names (`monster_names`) and creates objects for each monster using the `AddictionMonster` class from `AddictionMonster.py`. The function calls the `.battle()` method from the `AddictionMonster` class to handle each encounter, adjusting the player's lives based on win/loss outcomes. Starting with 3 lives, the player aims to defeat all three monsters to win, with the game ending in failure if their lives reach zero. The function provides dynamic feedback using `TermControl` (`tc`) to display success, failure, or encouragement messages, with color-coded text. This `while` loop integrates battle logic, tracks progress, and determines the final outcome, forming the central gameplay experience.
-
 
 `def addictionGame() -> None` - This function initiates the game itself, calling on `gameStart()` to validates if the player is ready to play. If `gameStart()` returns `True`, it calls 
 
@@ -103,6 +105,7 @@ If the player exhausts all questions without defeating the monster, they lose on
 `def main() -> None` - The `main` function is the entry point for the game. Calls `addictionGame()`.
 
 `if __name__ == "__main__":` -  This conditional statement ensures the `main()` is executed only when run directly, allowing the code to be imported elsewhere without immediately starting the game.
+
 
 ### Minigame 2
 
@@ -130,7 +133,8 @@ Minigame 2 runs through a set of words that requires the user to memorise within
 `def verify (dictionary, numWins) -> bool` - This function just stores the `message_dict` that has 10 responses to prompt and taunt the user. It will then randomise the from the dictionary and print the message. Then it will wait for the response from the use, and reply back with the user's response. While the cleaned_response is `False` it will change the color to red and then print that the response is invalid. then it will ask the user to only input the alphabets. After this it will wait for a new response, then it will filter the response and put it back into the new variable. It then compares between the filtered response and the dictionary to check if the user is correct. If the user is correct it will return `True`, else it will return `False` 
 
 `def wordMemoryGame() -> None` - This is the function for mini-game 2. It will first ask for the users difficulty and adjust the timing accordingly, then it will prompt the user for its input, if the input is not correct the user will lose a life, if the user loses all lives the user automatically loses. If the user is correct, the user will move forward to the next stage. After the game is over, the user wil move back to the main game. This function is called through the function `main()`.
-`main() -> None` - This execute the `wordMemoryGame()`
+`main() -> None` - This executes the `wordMemoryGame()` function
+
 
 ### Minigame 3 
 
@@ -165,4 +169,4 @@ Once the input is validated, it is converted into a list of floats using `conver
 
 If the player provides an incorrect response, the game ends. The correct numbers and the player’s input are displayed, along with a message encouraging them to try again. The game then outputs the total number of rounds completed as the final score. If the player successfully completes all rounds, a "Game Over" message in green congratulates them on their achievement. Throughout the function, terminal controls like `tc.clearScreen()`, `tc.changeColor()`, and `tc.resetColor()` are used to enhance the visual experience, making the game more interactive and user-friendly.
 
-`main() -> None` - This execute the `numberMemoryGame()`
+`main() -> None` - This executes the `numberMemoryGame()` function
