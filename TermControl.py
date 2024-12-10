@@ -20,15 +20,15 @@ class TermControl:
 
     # Prints the ASCII escape sequence to clear the terminal.
     def clearScreen(self):
-        print("\033[2J", end="")
+        print("\033[2J", end="", flush=True)
 
     # Prints the ASCII escape sequence to change colours.
     def changeColor(self, color):
-        print(self.color[color], end="")
+        print(self.color[color], end="", flush=True)
 
     # Prints the ASCII escape sequence to reset colours.
     def resetColor(self):
-        print("\033[0m", end="")
+        print("\033[0m", end="", flush=True)
 
 # Testing cases for the class when module is run as main file.
 def main():

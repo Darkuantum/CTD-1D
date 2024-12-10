@@ -59,8 +59,8 @@ def printPrompts(dictionary, numWins, timer) -> None:
     print(dictionary[numWins + 1])
     countdown(timer)
     tc.clearScreen()
-    print('')
     getpass(prompt = 'Press ENTER to continue.') # to clear the terminal in the event the user types something in the terminal
+    tc.clearScreen()
     tc.changeColor("magenta")
     print(randomiser(dictionary, numWins)) # magenta for randomised words
     tc.resetColor()

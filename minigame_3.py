@@ -116,8 +116,8 @@ def numberMemoryGame() -> None:
         # before clearing the screen
         countdown3(timer)
         tc.clearScreen()
-        print('')
         getpass(prompt = 'Press ENTER to continue.') # to clear the terminal in the event the user types something in the terminal
+        tc.clearScreen()
 
         # While loop to keep prompting the user for their input if it is invalid
         filtered_str = False
