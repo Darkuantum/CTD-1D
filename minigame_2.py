@@ -174,7 +174,7 @@ def wordMemoryGame() -> None:
         if lives == 0:
             isGameOver = True
             tc.changeColor("red")
-            print("You have lost the game. :()")
+            print("You have lost the game. :(")
             tc.resetColor()
         elif numWins == 5:
             isGameOver = True
